@@ -1,0 +1,6 @@
+Experimental support for Pascal (Delphi / Free Pascal): `languages: [pascal]`
+(aliases `delphi`, `objectpascal`) for .pas, .dpr, .dpk and .lpr files.
+Conditional compilation ({$IFDEF}, {$IF}, {$ELSE}...) is resolved before
+parsing against a default Delphi/Win32 define set, configurable with the
+SEMGREP_PASCAL_DEFINES environment variable. Identifiers are matched
+case-insensitively.

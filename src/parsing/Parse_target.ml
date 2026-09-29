@@ -198,6 +198,8 @@ let just_parse_with_lang lang file : Parsing_result2.t =
   | Lang.Kotlin ->
       run file [ TreeSitter Parse_kotlin_tree_sitter.parse ] (fun x -> x)
   | Lang.Fga -> run file [ TreeSitter Parse_fga_tree_sitter.parse ] (fun x -> x)
+  | Lang.Pascal ->
+      run file [ TreeSitter Parse_pascal_tree_sitter.parse ] (fun x -> x)
   | Lang.Lisp
   | Lang.Scheme
   | Lang.Clojure ->

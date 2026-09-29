@@ -529,6 +529,28 @@
     "tags": []
   },
   {
+    "id": "pascal",
+    "name": "Pascal",
+    "keys": [
+      "pascal",
+      "delphi",
+      "objectpascal"
+    ],
+    "maturity": "alpha",
+    "exts": [
+      ".pas",
+      ".dpr",
+      ".dpk",
+      ".lpr"
+    ],
+    "example_ext": ".pas",
+    "excluded_exts": [],
+    "reverse_exts": null,
+    "shebangs": [],
+    "is_target_language": true,
+    "tags": []
+  },
+  {
     "id": "php",
     "name": "PHP",
     "keys": [

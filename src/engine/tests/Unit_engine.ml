@@ -92,6 +92,7 @@ let full_lang_info =
     (Lang.Move_on_sui, "move_on_sui", ".move");
     (Lang.Move_on_aptos, "move_on_aptos", ".move");
     (Lang.Fga, "fga", ".fga");
+    (Lang.Pascal, "pascal", ".pas");
   ]
 
 (*****************************************************************************)
@@ -318,6 +319,7 @@ let maturity_tests () =
          make_maturity_tests Lang.Dockerfile "dockerfile" ".dockerfile" Experimental;
       *)
       make_maturity_tests Lang.Lua "lua" ".lua" Experimental;
+      make_maturity_tests Lang.Pascal "pascal" ".pas" Experimental;
       make_maturity_tests Lang.Ocaml "ocaml" ".ml" Experimental;
       make_maturity_tests Lang.R "r" ".r" Experimental;
       make_maturity_tests Lang.Solidity "solidity" ".sol" Experimental;

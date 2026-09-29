@@ -29,6 +29,7 @@ type t =
 | Move_on_sui
 | Move_on_aptos
 | Ocaml
+| Pascal
 | Php
 | Powershell
 | Promql
@@ -442,6 +443,19 @@ let list = [
   excluded_exts = [];
   reverse_exts = None;
   shebangs = [{|ocaml|}; {|ocamlscript|}];
+  tags = [];
+};
+{
+  id = Pascal;
+  id_string = "pascal";
+  name = "Pascal";
+  keys = [{|pascal|}; {|delphi|}; {|objectpascal|}];
+  exts = [{|.pas|}; {|.dpr|}; {|.dpk|}; {|.lpr|}];
+  maturity = Alpha;
+  example_ext = Some {|.pas|};
+  excluded_exts = [];
+  reverse_exts = None;
+  shebangs = [];
   tags = [];
 };
 {

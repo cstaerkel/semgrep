@@ -1,0 +1,591 @@
+==================================================
+Expression metavariable
+==================================================
+
+__SEMGREP_EXPRESSION $X.Free
+
+---
+
+(root
+  (semgrep_expression
+    (exprDot
+      lhs: (identifier)
+      operator: (kDot)
+      rhs: (identifier))))
+
+==================================================
+Expression ellipsis in call arguments
+==================================================
+
+__SEMGREP_EXPRESSION FreeAndNil(...)
+
+---
+
+(root
+  (semgrep_expression
+    (exprCall
+      entity: (identifier)
+      args: (exprArgs
+        (semgrep_ellipsis)))))
+
+==================================================
+Ellipsis metavariable in arguments
+==================================================
+
+__SEMGREP_EXPRESSION Format($FMT, $...ARGS)
+
+---
+
+(root
+  (semgrep_expression
+    (exprCall
+      entity: (identifier)
+      args: (exprArgs
+        (identifier)
+        (identifier)))))
+
+==================================================
+Deep expression
+==================================================
+
+__SEMGREP_EXPRESSION <... $QRY.SQL.Text ...>
+
+---
+
+(root
+  (semgrep_expression
+    (deep_ellipsis
+      (exprDot
+        lhs: (exprDot
+          lhs: (identifier)
+          operator: (kDot)
+          rhs: (identifier))
+        operator: (kDot)
+        rhs: (identifier)))))
+
+==================================================
+Statement sequence with semicolon-less ellipsis
+==================================================
+
+__SEMGREP_STATEMENTS
+$OBJ := $CLS.Create(...);
+...
+$OBJ.Free;
+
+---
+
+(root
+  (semgrep_statements
+    (assignment
+      lhs: (identifier)
+      operator: (kAssign)
+      rhs: (exprCall
+        entity: (exprDot
+          lhs: (identifier)
+          operator: (kDot)
+          rhs: (identifier))
+        args: (exprArgs
+          (semgrep_ellipsis))))
+    (semgrep_ellipsis)
+    (statement
+      (exprDot
+        lhs: (identifier)
+        operator: (kDot)
+        rhs: (identifier)))))
+
+==================================================
+Try finally with ellipsis
+==================================================
+
+__SEMGREP_STATEMENTS
+$X := TFoo.Create;
+try
+  ...
+finally
+  $X.Free;
+end;
+
+---
+
+(root
+  (semgrep_statements
+    (assignment
+      lhs: (identifier)
+      operator: (kAssign)
+      rhs: (exprDot
+        lhs: (identifier)
+        operator: (kDot)
+        rhs: (identifier)))
+    (try
+      (kTry)
+      try: (statements
+        (statement
+          (semgrep_ellipsis)))
+      finally: (kFinally)
+      finally: (statements
+        (statement
+          (exprDot
+            lhs: (identifier)
+            operator: (kDot)
+            rhs: (identifier))))
+      (kEnd))))
+
+==================================================
+Empty except block
+==================================================
+
+__SEMGREP_STATEMENTS
+try
+  ...
+except
+end;
+
+---
+
+(root
+  (semgrep_statements
+    (try
+      (kTry)
+      try: (statements
+        (statement
+          (semgrep_ellipsis)))
+      except: (kExcept)
+      (kEnd))))
+
+==================================================
+Exception handler metavariables
+==================================================
+
+__SEMGREP_STATEMENTS
+try
+  ...
+except
+  on $E: $EXC do
+    ...
+end;
+
+---
+
+(root
+  (semgrep_statements
+    (try
+      (kTry)
+      try: (statements
+        (statement
+          (semgrep_ellipsis)))
+      except: (kExcept)
+      except: (exceptionHandler
+        (kOn)
+        variable: (identifier)
+        exception: (typeref
+          (identifier))
+        (kDo)
+        body: (statement
+          (semgrep_ellipsis)))
+      (kEnd))))
+
+==================================================
+Procedure with ellipsis parameters and body
+==================================================
+
+procedure $P(...);
+begin
+  ...
+end;
+
+---
+
+(root
+  (defProc
+    header: (declProc
+      (kProcedure)
+      name: (identifier)
+      args: (declArgs
+        (declArg
+          (semgrep_ellipsis))))
+    body: (block
+      (kBegin)
+      (statement
+        (semgrep_ellipsis))
+      (kEnd))))
+
+==================================================
+Method declarations with ellipsis
+==================================================
+
+__SEMGREP_DECLARATIONS
+procedure $M; override;
+...
+
+---
+
+(root
+  (semgrep_declarations
+    (declProc
+      (kProcedure)
+      name: (identifier)
+      attribute: (procAttribute
+        (kOverride)))
+    (semgrep_ellipsis)))
+
+==================================================
+Uses clause with ellipsis
+==================================================
+
+__SEMGREP_DECLARATIONS
+uses ..., Vcl.Dialogs, ...;
+
+---
+
+(root
+  (semgrep_declarations
+    (declUses
+      (kUses)
+      (semgrep_ellipsis)
+      (moduleName
+        (identifier)
+        (kDot)
+        (identifier))
+      (semgrep_ellipsis))))
+
+==================================================
+Class with ellipsis members
+==================================================
+
+type
+  $C = class(TForm)
+    ...
+  end;
+
+---
+
+(root
+  (declTypes
+    (kType)
+    (declType
+      name: (identifier)
+      (kEq)
+      type: (declClass
+        (kClass)
+        parent: (typeref
+          (identifier))
+        (semgrep_ellipsis)
+        (kEnd)))))
+
+==================================================
+Unit with old-style initialization block
+==================================================
+
+unit A;
+interface
+implementation
+begin
+  Init;
+end.
+
+---
+
+(root
+  (unit
+    (kUnit)
+    (moduleName
+      (identifier))
+    (interface
+      (kInterface))
+    (implementation
+      (kImplementation)
+      (blockTr
+        (kBegin)
+        (statement
+          (identifier))
+        (kEnd)))
+    (kEndDot)))
+
+==================================================
+Program uses with in-file clause
+==================================================
+
+program P;
+uses
+  Forms,
+  Main in 'Main.pas' {MainForm};
+begin
+  Application.Run;
+end.
+
+---
+
+(root
+  (program
+    (kProgram)
+    (moduleName
+      (identifier))
+    (declUses
+      (kUses)
+      (moduleName
+        (identifier))
+      (moduleInFile
+        name: (moduleName
+          (identifier))
+        (kIn)
+        file: (literalString))
+      (comment))
+    (block
+      (kBegin)
+      (statement
+        (exprDot
+          lhs: (identifier)
+          operator: (kDot)
+          rhs: (identifier)))
+      (kEnd))
+    (kEndDot)))
+
+==================================================
+Package
+==================================================
+
+package P;
+requires
+  rtl, vcl;
+contains
+  A in 'A.pas', B;
+end.
+
+---
+
+(root
+  (package
+    (kPackage)
+    (moduleName
+      (identifier))
+    (kRequires)
+    (moduleName
+      (identifier))
+    (moduleName
+      (identifier))
+    (kContains)
+    (moduleInFile
+      name: (moduleName
+        (identifier))
+      (kIn)
+      file: (literalString))
+    (moduleName
+      (identifier))
+    (kEnd)
+    (kEndDot)))
+
+==================================================
+Raise at address
+==================================================
+
+__SEMGREP_STATEMENTS
+raise E.Create(M) at ReturnAddress;
+
+---
+
+(root
+  (semgrep_statements
+    (raise
+      (kRaise)
+      exception: (exprCall
+        entity: (exprDot
+          lhs: (identifier)
+          operator: (kDot)
+          rhs: (identifier))
+        args: (exprArgs
+          (identifier)))
+      (kRaiseAt)
+      address: (identifier))))
+
+==================================================
+Readonly dispinterface property
+==================================================
+
+type
+  I = dispinterface
+    property Count: Integer readonly dispid 1;
+  end;
+
+---
+
+(root
+  (declTypes
+    (kType)
+    (declType
+      name: (identifier)
+      (kEq)
+      type: (declIntf
+        (kDispInterface)
+        (declProp
+          (kProperty)
+          name: (identifier)
+          type: (type
+            (typeref
+              (identifier)))
+          (kReadonly)
+          (kDispId)
+          dispid: (literalNumber))
+        (kEnd)))))
+
+==================================================
+Dotted property accessor
+==================================================
+
+type
+  T = class
+    property X: Integer read FPoint.X write FPoint.X;
+  end;
+
+---
+
+(root
+  (declTypes
+    (kType)
+    (declType
+      name: (identifier)
+      (kEq)
+      type: (declClass
+        (kClass)
+        (declProp
+          (kProperty)
+          name: (identifier)
+          type: (type
+            (typeref
+              (identifier)))
+          (kRead)
+          getter: (exprDot
+            lhs: (identifier)
+            operator: (kDot)
+            rhs: (identifier))
+          (kWrite)
+          setter: (exprDot
+            lhs: (identifier)
+            operator: (kDot)
+            rhs: (identifier)))
+        (kEnd)))))
+
+==================================================
+Inline packed record variable
+==================================================
+
+var
+  Msg: packed record
+    A: Integer;
+  end;
+
+---
+
+(root
+  (declVars
+    (kVar)
+    (declVar
+      name: (identifier)
+      type: (type
+        (declClass
+          (kPacked)
+          (kRecord)
+          (declField
+            name: (identifier)
+            type: (type
+              (typeref
+                (identifier))))
+          (kEnd))))))
+
+==================================================
+Calling convention without semicolon
+==================================================
+
+function Init(var P: TProc): Boolean stdcall;
+begin
+end;
+
+---
+
+(root
+  (defProc
+    header: (declProc
+      (kFunction)
+      name: (identifier)
+      args: (declArgs
+        (declArg
+          (kVar)
+          name: (identifier)
+          type: (type
+            (typeref
+              (identifier)))))
+      type: (typeref
+        (identifier))
+      callconv: (kStdcall))
+    body: (block
+      (kBegin)
+      (kEnd))))
+
+==================================================
+Deprecated constant
+==================================================
+
+const
+  crOld = crNew deprecated 'use crNew';
+
+---
+
+(root
+  (declConsts
+    (kConst)
+    (declConst
+      name: (identifier)
+      defaultValue: (defaultValue
+        (kEq)
+        (identifier))
+      (kDeprecated)
+      (literalString))))
+
+==================================================
+Exponent float
+==================================================
+
+__SEMGREP_EXPRESSION 1E-14
+
+---
+
+(root
+  (semgrep_expression
+    (literalNumber)))
+
+==================================================
+Multiline string
+==================================================
+
+const
+  S = '''
+    a 'quoted' line
+    ''';
+
+---
+
+(root
+  (declConsts
+    (kConst)
+    (declConst
+      name: (identifier)
+      defaultValue: (defaultValue
+        (kEq)
+        (literalString)))))
+
+==================================================
+Unicode identifier
+==================================================
+
+var
+  Größe: Integer;
+
+---
+
+(root
+  (declVars
+    (kVar)
+    (declVar
+      name: (identifier)
+      type: (type
+        (typeref
+          (identifier))))))

@@ -1,0 +1,4 @@
+function $F($X: Integer): Integer;
+begin
+  ...
+end;

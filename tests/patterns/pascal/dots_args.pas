@@ -1,0 +1,8 @@
+procedure Test;
+begin
+  // ERROR:
+  Foo(1, 2, 3, 4, 5);
+  // ERROR:
+  Foo(5);
+  Foo(5, 6);
+end;

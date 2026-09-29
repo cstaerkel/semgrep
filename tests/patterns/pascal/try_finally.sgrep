@@ -1,0 +1,6 @@
+$X := $C.Create(...);
+try
+  ...
+finally
+  $X.Free;
+end;

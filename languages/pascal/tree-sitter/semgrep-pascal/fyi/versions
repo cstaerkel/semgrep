@@ -1,0 +1,26 @@
+File: semgrep-grammars/src/tree-sitter-pascal/LICENSE
+Git repo name: tree-sitter-pascal
+Latest commit in repo: 2f95d9cd6af861b364dd73b7a99529a2c08300af
+Last change in file:
+  commit 63ef0f268f1a419d86c0f5e318395ea493fd89f4
+  Author: Philip Zander <philip.zander@gmail.com>
+  Date:   Sun Nov 14 17:28:57 2021 +0100
+  
+      Initial commit
+---
+File: semgrep-grammars/src/tree-sitter-pascal/grammar.js
+Git repo name: tree-sitter-pascal
+Latest commit in repo: 2f95d9cd6af861b364dd73b7a99529a2c08300af
+Last change in file:
+  commit d621013aa5fbab57b75fdcb2d154979c76fc2e88
+  Author: Antoine Gaudreau Simard <a.simard@multidev.net>
+  Date:   Mon Sep 14 08:41:18 2026 -0400
+  
+      feat(grammar): support modern Delphi and FPC syntax
+---
+File: semgrep-grammars/src/semgrep-pascal/grammar.js
+Git repo name: semgrep
+Latest commit in repo: 7174bc06f51fd30401fcc503005b753fe75b502d
+Last change in file:
+
+---

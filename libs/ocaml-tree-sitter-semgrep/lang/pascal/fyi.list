@@ -1,0 +1,3 @@
+semgrep-grammars/src/tree-sitter-pascal/LICENSE
+semgrep-grammars/src/tree-sitter-pascal/grammar.js
+semgrep-grammars/src/semgrep-pascal/grammar.js

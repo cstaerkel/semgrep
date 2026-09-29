@@ -233,6 +233,14 @@
     "tree_sitter": "0.22.6",
     "url": "https://github.com/tree-sitter/tree-sitter-ocaml.git"
   },
+  "pascal": {
+    "commit": "2f95d9cd6af861b364dd73b7a99529a2c08300af",
+    "regen": [
+      "pascal"
+    ],
+    "tree_sitter": "0.26.3",
+    "url": "https://github.com/AntoineGS/tree-sitter-pascal.git"
+  },
   "php": {
     "commit": "7d07b41ce2d442ca9a90ed85d0075eccc17ae315",
     "regen": [

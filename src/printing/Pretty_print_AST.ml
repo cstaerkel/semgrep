@@ -239,6 +239,7 @@ and if_stmt env (tok, e, s, sopt) =
     | Lang.Gosu
     | Lang.Powershell
     | Lang.Fga
+    | Lang.Pascal
     | Lang.Terraform ->
         raise Todo
     | Lang.Python
@@ -322,6 +323,7 @@ and while_stmt env (tok, e, s) =
     | Lang.Gosu
     | Lang.Powershell
     | Lang.Fga
+    | Lang.Pascal
     | Lang.Ql ->
         raise Todo
     | Lang.Python
@@ -379,6 +381,7 @@ and do_while stmt env (s, e) =
     | Lang.Gosu
     | Lang.Powershell
     | Lang.Fga
+    | Lang.Pascal
     | Lang.Terraform ->
         raise Todo
     | Lang.Apex
@@ -434,6 +437,7 @@ and for_stmt env (for_tok, hdr, s) =
     | Lang.Gosu
     | Lang.Powershell
     | Lang.Fga
+    | Lang.Pascal
     | Lang.Terraform ->
         raise Todo
     | Lang.Apex
@@ -697,6 +701,9 @@ and def_stmt env (entity, def_kind) =
       | Lang.Fga ->
           ( (fun _typ id _e -> F.sprintf "define %s:" id),
             fun _typ id e -> F.sprintf "define %s: %s" id e )
+      | Lang.Pascal ->
+          ( (fun typ id _e -> F.sprintf "var %s: %s;" id typ),
+            fun typ id e -> F.sprintf "var %s: %s := %s;" id typ e )
       | Lang.Json
       | Lang.Jsonnet
       | Lang.Ocaml ->

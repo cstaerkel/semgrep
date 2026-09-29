@@ -34,6 +34,7 @@ STAT_LANGUAGES2 = \
   lua \
   move-on-sui \
   ocaml \
+  pascal \
   php \
   powershell \
   promql \

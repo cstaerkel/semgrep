@@ -460,6 +460,16 @@ not ambiguous is welcome here.
     ),
     Language(
         comment="",
+        id_="pascal",
+        name="Pascal",
+        keys=["pascal", "delphi", "objectpascal"],
+        exts=[".pas", ".dpr", ".dpk", ".lpr"],
+        example_ext=".pas",
+        maturity=Maturity.ALPHA,
+        shebangs=[]
+    ),
+    Language(
+        comment="",
         id_="php",
         name="PHP",
         keys=["php"],
