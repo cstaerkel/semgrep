@@ -1,0 +1,55 @@
+# Fork-only helper (not meant for upstream): runs ocamlformat 0.29.0 - the
+# version pinned in dev/required.opam for the lint-ocaml pre-commit hook - on
+# the OCaml files changed by the Pascal branch, and pushes the result to the
+# branch cstaerkel/ocamlformat-result so it can be reviewed and squashed.
+
+name: ocamlformat-pascal
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - cstaerkel/pascal-support-windows
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: cstaerkel/pascal-support
+          fetch-depth: 0
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: "5.4"
+
+      - name: Install ocamlformat 0.29.0
+        run: opam install -y ocamlformat.0.29.0
+
+      - name: Format the OCaml files changed on the branch
+        run: |
+          git fetch origin develop
+          base=$(git merge-base HEAD origin/develop)
+          files=$(git diff --name-only --diff-filter=AM "$base" HEAD -- '*.ml' '*.mli' \
+                  | grep -v '/tree-sitter/semgrep-pascal/' || true)
+          echo "Files:"; echo "$files"
+          for f in $files; do opam exec -- ocamlformat --inplace "$f"; done
+          git status --short
+          git diff --stat
+
+      - name: Push the result
+        run: |
+          git config user.name "Christopher Staerkel"
+          git config user.email "christopher.staerkel@pathfinder.de"
+          if git diff --quiet; then
+            echo "Already formatted"
+            git push -f origin HEAD:refs/heads/cstaerkel/ocamlformat-result
+          else
+            git commit -am "style: ocamlformat 0.29.0"
+            git push -f origin HEAD:refs/heads/cstaerkel/ocamlformat-result
+          fi

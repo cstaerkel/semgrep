@@ -1,0 +1,194 @@
+# Builds a native Windows (x86_64) semgrep with Pascal/Delphi support:
+#  - semgrep-core.exe + the MinGW DLLs it needs
+#  - a pip-installable wheel (semgrep-*-win_amd64.whl) containing them
+#
+# Standalone workflow for the cstaerkel/pascal-support-windows branch (fork only,
+# not meant for upstream); it does not use the upstream jsonnet generators or
+# the Depot runners.
+
+name: build-windows-pascal
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - cstaerkel/pascal-support-windows
+    paths-ignore:
+      - .github/workflows/bundle-windows-pascal.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 350
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Configure git (long paths, no CRLF)
+        run: |
+          git config --global core.longpaths true
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - uses: actions/checkout@v4
+
+      # Same setup as upstream's generated workflows (semgrep.libsonnet):
+      # their setup-ocaml fork, the pinned opam-repository, and git
+      # maintenance disabled (otherwise the initial repository fetch fails
+      # with opam exit code 40).
+      - name: Set up OCaml (Cygwin + MinGW-w64)
+        env:
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: maintenance.auto
+          GIT_CONFIG_VALUE_0: "false"
+        uses: semgrep/setup-ocaml@a739c5405d73c42ef15a9dc995efc0f87396cc36
+        with:
+          ocaml-compiler: ocaml-variants.5.4.0+options,ocaml-option-flambda
+          opam-pin: false
+          opam-repositories: |
+            default: https://github.com/ocaml/opam-repository.git#78d29aba187e8362b8ab86c189790c0af9153d4b
+          save-opam-post-run: true
+
+      - name: Tool versions
+        run: |
+          uname -a
+          opam --version
+          opam exec -- ocamlfind ocamlopt -version || opam exec -- ocamlopt -version
+          opam var sys-ocaml-cc || true
+
+      # Output is also written to a log file so that a failure can be
+      # surfaced as an annotation (readable without downloading raw logs).
+      # The runner's Cygwin MinGW GCC (>= 14) turns incompatible-pointer-types
+      # and implicit-function-declaration into hard errors, which breaks the C
+      # stubs of parmap 1.2.5 and ANSITerminal 0.8.5. DUNE_WORKSPACE applies a
+      # workspace to every `dune build -p` that opam runs for the dependencies
+      # and downgrades them back to warnings.
+      - name: Install OCaml dependencies (locked, Windows lockfile)
+        run: |
+          set -o pipefail
+          ws="$(cygpath -u "$RUNNER_TEMP")/deps-dune-workspace"
+          cat > "$ws" <<'EOF'
+          (lang dune 3.0)
+          (env
+           (_
+            (c_flags
+             (:standard
+              -Wno-error=incompatible-pointer-types
+              -Wno-error=implicit-function-declaration
+              -Wno-error=int-conversion))))
+          EOF
+          sed -i 's/^          //' "$ws"
+          cat "$ws"
+          export DUNE_WORKSPACE="$(cygpath -m "$ws")"
+          opam exec -- make install-deps 2>&1 | tee ci-step.log
+
+      - name: Build semgrep-core.exe
+        run: |
+          set -o pipefail
+          # The Makefile compares `git rev-parse --show-toplevel` (D:/...) with
+          # `pwd` (/cygdrive/d/...); under Cygwin they never match, so it would
+          # assume the proprietary monorepo layout (../_build). Force the OSS one.
+          # The generated grammar stubs link with -Wl,-rpath,..., which
+          # ocamlmklib passes to MinGW gcc as a bare -rpath (unsupported).
+          # Windows has no rpath anyway (DLLs are copied next to the exe),
+          # so drop it in this checkout only.
+          sed -i '/-Wl,-rpath/d' languages/*/tree-sitter/*/lib/dune
+          grep -l -- '-rpath' languages/*/tree-sitter/*/lib/dune || echo 'rpath removed'
+          opam exec -- make core BUILD=_build BUILD_DEFAULT=_build/default 2>&1 | tee ci-step.log
+          ls -la _build/install/default/bin/
+
+      - name: Report the failing step's log tail
+        if: failure()
+        run: |
+          [ -f ci-step.log ] || exit 0
+          grep -n -i -E 'error|failed|cannot|not found|no such' ci-step.log | tail -40 > ci-errors.txt || true
+          tail -60 ci-step.log > ci-tail.txt
+          enc() { sed -e 's/%/%25/g' -e 's/\r//g' "$1" | awk '{printf "%s%%0A", $0}'; }
+          echo "::error title=error lines::$(enc ci-errors.txt)"
+          echo "::error title=log tail::$(enc ci-tail.txt)"
+
+      - name: Collect semgrep-core.exe and its DLLs
+        run: |
+          set -x
+          DST=cli/src/semgrep/bin
+          mkdir -p "$DST"
+          cp -L _build/install/default/bin/semgrep-core.exe "$DST/"
+          SYS_ROOT_BIN="$(opam exec -- x86_64-w64-mingw32-gcc -print-sysroot)/mingw/bin"
+          TS_BIN="$(bash tree-sitter-config.sh 2>/dev/null)/bin"
+          TS_BIN2="$PWD/libs/ocaml-tree-sitter-semgrep/core/tree-sitter-out/bin"
+          DLL_PATHS="$SYS_ROOT_BIN:$TS_BIN:$TS_BIN2"
+          dlls=$(PATH="$DLL_PATHS:$PATH" cygcheck "$DST/semgrep-core.exe" \
+                 | grep -i '\(x86_64-w64-mingw32\|tree-sitter\)' \
+                 | sed 's/^[[:space:]]*//' | sort -u)
+          for dll in $dlls; do
+            echo "Copying $dll"
+            cp -p "$dll" "$DST/"
+          done
+          ls -la "$DST"
+
+      - name: Smoke test semgrep-core.exe
+        run: |
+          cd cli/src/semgrep/bin
+          ./semgrep-core.exe -version
+          ./semgrep-core.exe -lang pascal -dump_ast ../../../../tests/parsing/pascal/hello-world.pas | head -20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the wheel
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip build wheel
+          cd cli
+          python -m build --wheel
+          Get-ChildItem dist
+
+      - name: Test the wheel
+        shell: pwsh
+        run: |
+          python -m venv C:\sgvenv
+          C:\sgvenv\Scripts\python -m pip install (Get-ChildItem cli\dist\*.whl).FullName
+          $env:SEMGREP_SEND_METRICS = "off"
+          $env:SEMGREP_ENABLE_VERSION_CHECK = "0"
+          C:\sgvenv\Scripts\semgrep --version
+          C:\sgvenv\Scripts\semgrep scan --metrics=off --lang pascal -e 'FreeAndNil($X)' --json tests\patterns\pascal\case_insensitive.pas > out.json
+          python -c "import json; r=json.load(open('out.json'))['results']; print(len(r),'findings'); assert len(r)==3, r"
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp cli/dist/*.whl dist/
+          (cd cli/src/semgrep/bin && 7z a -tzip ../../../../dist/semgrep-core-pascal-windows-x86_64.zip ./*)
+          ls -la dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-pascal-windows-x86_64
+          path: dist/*
+          if-no-files-found: error
+
+      # Also publish the wheel to an orphan branch, so it can be fetched with
+      # plain git (artifact downloads need API access to blob storage). The
+      # bundle-windows-pascal workflow builds the standalone bundle from it.
+      - name: Publish the wheel to the cstaerkel/windows-dist branch
+        run: |
+          set -e
+          sha=$(git rev-parse --short HEAD)
+          mkdir -p /tmp/dist-branch && cd /tmp/dist-branch
+          git init -q
+          git config user.name "Christopher Staerkel"
+          git config user.email "christopher.staerkel@pathfinder.de"
+          cp "$GITHUB_WORKSPACE"/dist/*.whl .
+          sha256sum *.whl > SHA256SUMS
+          echo "Built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID from $sha" > README.txt
+          git add -A
+          git commit -q -m "Windows wheel from $sha"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY.git" HEAD:refs/heads/cstaerkel/windows-dist
