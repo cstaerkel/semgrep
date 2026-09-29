@@ -1,0 +1,163 @@
+# Builds a standalone Windows bundle of Semgrep with Pascal support:
+# semgrep.exe plus an _internal folder with an embedded Python, the Semgrep
+# CLI and semgrep-core.exe. The target machine needs no Python.
+#
+# Input: the wheel that build-windows-pascal publishes to the
+# cstaerkel/windows-dist branch (run build-windows-pascal first). Output: semgrep-pascal-windows-x64.zip,
+# added to the same branch and uploaded as an artifact.
+#
+# Fork-only workflow (not meant for upstream).
+
+name: bundle-windows-pascal
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - cstaerkel/pascal-support-windows
+    paths:
+      - .github/workflows/bundle-windows-pascal.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bundle-windows-pascal
+  cancel-in-progress: true
+
+jobs:
+  bundle:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Configure git (long paths, no CRLF)
+        run: |
+          git config --global core.longpaths true
+          git config --global core.autocrlf false
+
+      - uses: actions/checkout@v4
+        with:
+          ref: cstaerkel/pascal-support-windows
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Get the wheel from the windows-dist branch
+        run: |
+          git fetch --depth 1 origin cstaerkel/windows-dist
+          New-Item -ItemType Directory -Force C:\wheel | Out-Null
+          $whl = git ls-tree --name-only FETCH_HEAD | Where-Object { $_ -like "*.whl" }
+          # cmd redirection is binary-safe (PowerShell's is not)
+          cmd /c "git cat-file blob FETCH_HEAD:$whl > C:\wheel\$whl"
+          Get-ChildItem C:\wheel
+          git show FETCH_HEAD:README.txt
+
+      - name: Install the wheel and PyInstaller
+        run: |
+          python -m venv C:\sgvenv
+          C:\sgvenv\Scripts\python -m pip install --disable-pip-version-check (Get-ChildItem C:\wheel\*.whl).FullName pyinstaller
+
+      # The entry point is pysemgrep: the 'semgrep' wrapper would start
+      # semgrep-core as osemgrep, which hands 'scan' back to a 'pysemgrep'
+      # executable on PATH that does not exist in the bundle.
+      - name: Build the bundle
+        run: |
+          @'
+          import multiprocessing
+          import sys
+
+          from semgrep.console_scripts.pysemgrep import main
+
+          if __name__ == "__main__":
+              multiprocessing.freeze_support()
+              sys.exit(main())
+          '@ | Set-Content -Encoding ASCII C:\semgrep_entry.py
+          # "X utf8": UTF-8 mode, otherwise report files are written in the
+          # ANSI code page (cp1252) and non-Latin-1 characters crash the write.
+          # mypyc-compiled dependencies (e.g. tomli) import a hidden top-level
+          # helper module that PyInstaller does not detect.
+          $hidden = C:\sgvenv\Scripts\python -c "import pathlib,sysconfig; sp=pathlib.Path(sysconfig.get_paths()['purelib']); print(' '.join(p.name.split('.')[0] for p in sp.iterdir() if '__mypyc' in p.name))"
+          $hiddenArgs = @()
+          foreach ($h in ($hidden -split ' ')) { if ($h) { $hiddenArgs += "--hidden-import=$h" } }
+          Write-Host "hidden imports: $hiddenArgs"
+          C:\sgvenv\Scripts\pyinstaller --noconfirm --clean --onedir --console --name semgrep `
+            --distpath C:\sgdist --workpath C:\sgbuild --specpath C:\sgbuild `
+            --collect-all semgrep --recursive-copy-metadata semgrep `
+            --collect-data jsonschema_specifications --collect-submodules opentelemetry `
+            --python-option "X utf8" `
+            @hiddenArgs C:\semgrep_entry.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-ChildItem C:\sgdist\semgrep
+          Get-ChildItem C:\sgdist\semgrep\_internal\semgrep\bin
+
+      - name: Test the bundle without Python on PATH
+        run: |
+          $ErrorActionPreference = "Continue"
+          $log = "$env:GITHUB_WORKSPACE\bundle-test.log"
+          & {
+            $env:PATH = "C:\Windows\System32;C:\Windows;C:\Program Files\Git\cmd"
+            $env:SEMGREP_SEND_METRICS = "off"
+            $py = Get-Command python -ErrorAction SilentlyContinue
+            if ($py) { Write-Output "FAIL: python still on PATH: $($py.Source)"; return }
+            $sg = "C:\sgdist\semgrep\semgrep.exe"
+            Write-Output "--- version"
+            & $sg --version
+            Write-Output "version exit=$LASTEXITCODE"
+            New-Item -ItemType Directory -Force out | Out-Null
+            Write-Output "--- scan"
+            & $sg scan --metrics=off --disable-version-check --lang pascal -e 'FreeAndNil($X)' `
+              --text --json-output=out\s.json --sarif-output=out\s.sarif `
+              --gitlab-sast-output=out\gl.json --junit-xml-output=out\j.xml --text-output=out\s.txt `
+              tests\patterns\pascal\case_insensitive.pas
+            Write-Output "scan exit=$LASTEXITCODE"
+            Get-ChildItem out | ForEach-Object { Write-Output "out: $($_.Name) $($_.Length)" }
+          } *>&1 | Tee-Object -FilePath $log
+          $text = Get-Content $log -Raw
+          if ($text -match "FAIL:" -or $text -notmatch "version exit=0" -or $text -notmatch "scan exit=0") { exit 1 }
+          $n = @((Get-Content out\s.json -Raw | ConvertFrom-Json).results).Count
+          Write-Host "$n findings"
+          if ($n -ne 3) { Add-Content $log "FAIL: expected 3 findings, got $n"; exit 1 }
+          foreach ($f in "s.sarif", "gl.json", "j.xml", "s.txt") {
+            if (-not (Test-Path "out\$f")) { Add-Content $log "FAIL: missing out\$f"; exit 1 }
+          }
+
+      - name: Report the test log
+        if: failure()
+        shell: bash
+        run: |
+          f="$GITHUB_WORKSPACE/bundle-test.log"
+          [ -f "$f" ] || exit 0
+          tail -c 12000 "$f" | tr -d '\r' | sed -e 's/%/%25/g' | awk '{printf "%s%%0A", $0}' > /tmp/enc.txt
+          echo "::error title=bundle test log::$(cat /tmp/enc.txt)"
+
+      - name: Package
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          7z a -tzip -mx=9 "$env:GITHUB_WORKSPACE\dist\semgrep-pascal-windows-x64.zip" C:\sgdist\semgrep
+          Get-ChildItem dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-pascal-windows-x64-standalone
+          path: dist/*
+          if-no-files-found: error
+
+      - name: Add the bundle to the cstaerkel/windows-dist branch
+        shell: bash
+        run: |
+          set -e
+          git config --global user.name "Christopher Staerkel"
+          git config --global user.email "christopher.staerkel@pathfinder.de"
+          rm -rf /tmp/wd && git clone -q --depth 1 --branch cstaerkel/windows-dist \
+            "https://x-access-token:${{ github.token }}@github.com/$GITHUB_REPOSITORY.git" /tmp/wd
+          cd /tmp/wd
+          cp "$GITHUB_WORKSPACE/dist/semgrep-pascal-windows-x64.zip" .
+          sha256sum *.whl *.zip > SHA256SUMS
+          echo "Bundle built by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> README.txt
+          git add -A
+          git commit -q -m "Standalone Windows bundle"
+          git push -q origin HEAD:refs/heads/cstaerkel/windows-dist
