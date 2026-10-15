@@ -463,7 +463,8 @@ not ambiguous is welcome here.
         id_="pascal",
         name="Pascal",
         keys=["pascal", "delphi", "objectpascal"],
-        exts=[".pas", ".dpr", ".dpk", ".lpr"],
+        # Delphi ignores the case of file names; .PAS is common in older code
+        exts=[".pas", ".PAS", ".Pas", ".dpr", ".DPR", ".Dpr", ".dpk", ".DPK", ".Dpk", ".lpr", ".LPR", ".Lpr"],
         example_ext=".pas",
         maturity=Maturity.ALPHA,
         shebangs=[]

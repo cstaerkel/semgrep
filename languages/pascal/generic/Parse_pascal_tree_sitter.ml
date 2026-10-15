@@ -341,14 +341,23 @@ let tparams_of_genericname (env : env) (x : CST.genericname) :
         delimited
           (fun ((more, id, constr, _default) : CST.genericarg) ->
             let ids =
-              (match more with
-                | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
-                | None -> [])
+              List.map (fun (i, _) -> map_identifier env i) more
               @ [ map_identifier env id ]
+            in
+            (* T: IFoo, class, constructor *)
+            let bound (c : CST.anon_choice_type_22ff6c5) =
+              match c with
+              | `Type t -> map_typeref env t
+              | `Kclass t
+              | `Krec t
+              | `Kcon t ->
+                  let s, tok = str env t in
+                  G.TyN (name_of_id (lower s, tok)) |> G.t
             in
             let bounds =
               match constr with
-              | Some (_colon, t) -> [ map_typeref env t ]
+              | Some (_colon, xs, last) ->
+                  List.map (fun (c, _comma) -> bound c) xs @ [ bound last ]
               | None -> []
             in
             List.map
@@ -621,62 +630,74 @@ and map_declargs_opt (env : env) (x : CST.declargs option) : G.parameters =
 and map_declarg (env : env) (x : CST.declarg) : G.parameter list =
   match x with
   | `Semg_ellips tok -> [ G.ParamEllipsis (token env tok) ]
-  | `Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa x -> (
-      match x with
-      | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa
-          (modifier, more, id, typ) ->
-          let attrs =
-            match modifier with
-            | `Kvar t -> [ G.KeywordAttr (G.Var, token env t) ]
-            | `Kout t -> [ G.OtherAttribute (todo_kind env "out" t, []) ]
-            | `Kcon t -> [ G.KeywordAttr (G.Const, token env t) ]
-            | `Kconst_opt_rttias (t, _attrs) ->
-                [ G.KeywordAttr (G.Const, token env t) ]
-          in
-          let ptype, pdefault =
-            match typ with
-            | Some (_colon, t, def) ->
-                (Some (map_type env t), Option.map (map_defaultvalue env) def)
-            | None -> (None, None)
-          in
-          let ids =
-            (match more with
-              | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
-              | None -> [])
-            @ [ map_identifier env id ]
-          in
-          List.map
-            (fun id ->
-              G.Param
-                {
-                  G.pname = Some id;
-                  ptype;
-                  pdefault;
-                  pattrs = attrs;
-                  pinfo = id_info ();
-                })
-            ids
-      | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa
-          ((more, id, _colon, t, def) : CST.declvariantfield) ->
-          let ptype = Some (map_type env t) in
-          let pdefault = Option.map (map_defaultvalue env) def in
-          let ids =
-            (match more with
-              | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
-              | None -> [])
-            @ [ map_identifier env id ]
-          in
-          List.map
-            (fun id ->
-              G.Param
-                {
-                  G.pname = Some id;
-                  ptype;
-                  pdefault;
-                  pattrs = [];
-                  pinfo = id_info ();
-                })
-            ids)
+  | `Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa x ->
+      map_declarg_ env [] x
+  (* [ref] const R: TRect *)
+  | `Rttias_choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa
+      (rtti, x) ->
+      map_declarg_ env (map_rttiattributes env (Some rtti)) x
+
+and map_declarg_ (env : env) (extra_attrs : G.attribute list)
+    (x :
+      CST
+      .anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07)
+    : G.parameter list =
+  match x with
+  | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa
+      (modifier, more, id, typ) ->
+      let attrs =
+        match modifier with
+        | `Kvar t -> [ G.KeywordAttr (G.Var, token env t) ]
+        | `Kout t -> [ G.OtherAttribute (todo_kind env "out" t, []) ]
+        | `Kcon t -> [ G.KeywordAttr (G.Const, token env t) ]
+        | `Kconst_opt_rttias (t, rtti) ->
+            G.KeywordAttr (G.Const, token env t) :: map_rttiattributes env rtti
+      in
+      let attrs = extra_attrs @ attrs in
+      let ptype, pdefault =
+        match typ with
+        | Some (_colon, t, def) ->
+            (Some (map_type env t), Option.map (map_defaultvalue env) def)
+        | None -> (None, None)
+      in
+      let ids =
+        (match more with
+          | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
+          | None -> [])
+        @ [ map_identifier env id ]
+      in
+      List.map
+        (fun id ->
+          G.Param
+            {
+              G.pname = Some id;
+              ptype;
+              pdefault;
+              pattrs = attrs;
+              pinfo = id_info ();
+            })
+        ids
+  | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa
+      ((more, id, _colon, t, def) : CST.declvariantfield) ->
+      let ptype = Some (map_type env t) in
+      let pdefault = Option.map (map_defaultvalue env) def in
+      let ids =
+        (match more with
+          | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
+          | None -> [])
+        @ [ map_identifier env id ]
+      in
+      List.map
+        (fun id ->
+          G.Param
+            {
+              G.pname = Some id;
+              ptype;
+              pdefault;
+              pattrs = extra_attrs;
+              pinfo = id_info ();
+            })
+        ids
 
 (*****************************************************************************)
 (* Types (full) *)
@@ -754,6 +775,12 @@ and map_subrangebound (env : env) (x : CST.subrangebound) : G.expr =
               token env t )
             [ G.L lit |> G.e ])
   | `Lite_4d69a90 s -> G.L (map_literalstring env s) |> G.e
+  (* Low(TE)..High(TE) *)
+  | `Subr (id, l, args, r) ->
+      G.Call
+        ( G.N (name_of_id (map_identifier env id)) |> G.e,
+          (token env l, map_exprargs env args, token env r) )
+      |> G.e
   | `Type_ t -> (
       let t = map_typeref_ env t in
       match t.t with
@@ -796,15 +823,45 @@ and map_assignment (env : env) ((lhs, op, rhs) : CST.assignment) : G.stmt =
           G.exprstmt (G.AssignOp (lhs, (G.Div, token env t), rhs) |> G.e))
 
 and map_vardef (env : env) ((tvar, id, _colon, t) : CST.vardef) : G.stmt =
+  map_inline_vars env tvar [ id ] (map_typeref env t)
+
+(* inline variables: var A, B: Integer;  var S: array[Boolean] of Integer; *)
+and map_vardefmulti (env : env) ((tvar, x) : CST.vardefmulti) : G.stmt =
+  match x with
+  | `Id_rep1_COMMA_id_COLON_type (id, more, _colon, t) ->
+      map_inline_vars env tvar (id :: List.map snd more) (map_type env t)
+  | `Id_COLON_choice_decl (id, _colon, t) ->
+      map_inline_vars env tvar [ id ] (map_type env (t :> CST.type_))
+
+and map_inline_vars (env : env) (tvar : CST.kvar) (ids : CST.identifier list)
+    (vtype : G.type_) : G.stmt =
+  ids
+  |> List.map (fun id ->
+      let ent =
+        entity_of_ident
+          ~attrs:[ G.KeywordAttr (G.Var, token env tvar) ]
+          (map_identifier env id)
+      in
+      G.DefStmt
+        (ent, G.VarDef { G.vinit = None; vtype = Some vtype; vtok = G.no_sc })
+      |> G.s)
+  |> G.stmt1
+
+(* inline constants: const C = 'x';  const D: Integer = 1; *)
+and map_constdef (env : env) ((tconst, id, typ, def) : CST.constdef) : G.stmt =
   let ent =
     entity_of_ident
-      ~attrs:[ G.KeywordAttr (G.Var, token env tvar) ]
+      ~attrs:[ G.KeywordAttr (G.Const, token env tconst) ]
       (map_identifier env id)
   in
   G.DefStmt
     ( ent,
       G.VarDef
-        { G.vinit = None; vtype = Some (map_typeref env t); vtok = G.no_sc } )
+        {
+          G.vinit = Some (map_defaultvalue env def);
+          vtype = Option.map (fun (_, t) -> map_type env t) typ;
+          vtok = G.no_sc;
+        } )
   |> G.s
 
 and map_label (env : env) ((id, _colon) : CST.label) : G.ident =
@@ -996,6 +1053,8 @@ and map_statement (env : env) (x : CST.statement) : G.stmt =
       s
   | `Assign_SEMI (a, _sc) -> map_assignment env a
   | `Vardef_SEMI (v, _sc) -> map_vardef env v
+  | `Vard_SEMI (v, _sc) -> map_vardefmulti env v
+  | `Cons_SEMI (c, _sc) -> map_constdef env c
   | `Stmt_ (`Expr_SEMI (e, sc)) -> expr_stmt env (map_expr env e) (token env sc)
   | `If (tif, c, _then, s) -> map_if env tif c (map_statement env s) None
   | `Ifelse (tif, c, _then, then_, _else, else_) ->
@@ -1857,13 +1916,38 @@ let map_root (env : env) (x : CST.root) : G.any =
 (* Entry points *)
 (*****************************************************************************)
 
+(* (line, column) -> byte offset, like H.line_col_to_pos but from an array
+ * of line start offsets instead of a hash table with one entry per byte of
+ * the file, which made the garbage collector dominate the parse time of
+ * large units (several MB). [src] has the same layout as the file (the
+ * preprocessor only blanks characters). *)
+let line_col_to_pos_of_string (src : string) : int * int -> int =
+  let starts = ref [ 0 ] in
+  String.iteri (fun i c -> if c = '\n' then starts := (i + 1) :: !starts) src;
+  let starts = Array.of_list (List.rev !starts) in
+  let len = String.length src in
+  fun (line, col) ->
+    (* lines are 1-based, columns 0-based *)
+    if line < 1 || line > Array.length starts || col < 0 then raise Not_found
+    else
+      let pos = starts.(line - 1) + col in
+      if pos > len + 1 then raise Not_found else pos
+
 let parse (file : Fpath.t) =
+  let src =
+    Lazy_safe.from_fun (fun () -> Pascal_preprocessor.preprocess_file file)
+  in
   H.wrap_parser
     (fun () ->
-      let src = Pascal_preprocessor.preprocess_file file in
-      Tree_sitter_pascal.Parse.string ~src_file:!!file src)
+      Tree_sitter_pascal.Parse.string ~src_file:!!file (Lazy_safe.force src))
     (fun cst _extras ->
-      let env = { H.file; conv = H.line_col_to_pos file; extra = Program } in
+      let env =
+        {
+          H.file;
+          conv = line_col_to_pos_of_string (Lazy_safe.force src);
+          extra = Program;
+        }
+      in
       match map_root env cst with
       | G.Pr xs -> xs
       | G.S s -> [ s ]

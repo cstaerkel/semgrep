@@ -539,9 +539,17 @@
     "maturity": "alpha",
     "exts": [
       ".pas",
+      ".PAS",
+      ".Pas",
       ".dpr",
+      ".DPR",
+      ".Dpr",
       ".dpk",
-      ".lpr"
+      ".DPK",
+      ".Dpk",
+      ".lpr",
+      ".LPR",
+      ".Lpr"
     ],
     "example_ext": ".pas",
     "excluded_exts": [],

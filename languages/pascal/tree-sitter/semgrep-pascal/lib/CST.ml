@@ -10,338 +10,342 @@ open Tree_sitter_run
 
 type tok_prec_p5_pat_9f5699f = Token.t
 
-type ktrue = Token.t (* pattern true *)
-
-type kobjcprotocol = Token.t (* pattern objcprotocol *)
-
-type kbegin = Token.t (* pattern begin *)
-
-type kfalse = Token.t (* pattern false *)
-
-type klabel = Token.t (* pattern label *)
-
-type kset = Token.t (* pattern set *)
-
-type kinterface = Token.t (* pattern interface *)
+type ktry = Token.t (* pattern try *)
 
 type kobject = Token.t (* pattern object *)
 
-type kcdecl = Token.t (* pattern cdecl *)
-
-type kuses = Token.t (* pattern uses *)
-
-type imm_tok_pat_f57674d = Token.t (* pattern %[01]+ *)
-
-type kdeprecated = Token.t (* pattern deprecated *)
-
-type kinline = Token.t (* pattern inline *)
-
-type kunimplemented = Token.t (* pattern unimplemented *)
-
-type kvar = Token.t (* pattern var *)
-
-type kinitialization = Token.t (* pattern initialization *)
-
-type kiocheck = Token.t (* pattern iocheck *)
-
-type kprocedure = Token.t (* pattern procedure *)
-
-type koperator = Token.t (* pattern operator *)
-
-type kgeneric = Token.t (* pattern generic *)
-
-type ppendif = Token.t
-
-type kthreadvar = Token.t (* pattern threadvar *)
-
-type kconstructor = Token.t (* pattern constructor *)
-
-type kexternal = Token.t (* pattern external *)
-
-type pat_cdd9bad = Token.t (* pattern "'[^']*'" *)
-
-type ksaveregisters = Token.t (* pattern saveregisters *)
-
-type kpacked = Token.t (* pattern packed *)
-
-type pat_cafba40 = Token.t (* pattern [0-9a-fA-F] *)
-
-type kinherited = Token.t (* pattern inherited *)
-
-type kshr = Token.t (* pattern shr *)
-
-type kdownto = Token.t (* pattern downto *)
-
-type kraiseat = Token.t
-
-type krequired = Token.t (* pattern required *)
-
-type kif = Token.t (* pattern if *)
-
-type kwith = Token.t (* pattern with *)
-
-type kconst = Token.t (* pattern const *)
-
-type kexports = Token.t (* pattern exports *)
-
-type knoreturn = Token.t (* pattern noreturn *)
-
-type kmwpascal = Token.t (* pattern mwpascal *)
-
-type kpackage = Token.t (* pattern package *)
+type kcase = Token.t (* pattern case *)
 
 type kfar = Token.t (* pattern far *)
 
-type kobjcclass = Token.t (* pattern objcclass *)
-
-type kexport = Token.t (* pattern export *)
-
-type tok_prec_p5_pat_ef0cc7f = Token.t
-
-type kdynamic = Token.t (* pattern dynamic *)
-
-type krepeat = Token.t (* pattern repeat *)
-
-type koptional = Token.t (* pattern optional *)
-
 type klibrary = Token.t (* pattern library *)
-
-type kvarargs = Token.t (* pattern varargs *)
 
 type kshl = Token.t (* pattern shl *)
 
-type kabstract = Token.t (* pattern abstract *)
-
-type kexperimental = Token.t (* pattern experimental *)
+type kinterrupt = Token.t (* pattern interrupt *)
 
 type kof = Token.t (* pattern of *)
 
-type kwriteonly = Token.t (* pattern writeonly *)
+type kbegin = Token.t (* pattern begin *)
 
-type kcontains = Token.t (* pattern contains *)
+type kclass = Token.t (* pattern class *)
 
-type kreference = Token.t (* pattern reference *)
+type kvar = Token.t (* pattern var *)
 
-type pat_3ea53fb = Token.t (* pattern [.,:;+\-*\[\]<>&%$@] *)
-
-type knil = Token.t (* pattern nil *)
-
-type kto = Token.t (* pattern to *)
-
-type tok_prec_p5_pat_0a9b8cd = Token.t
-
-type kfinally = Token.t (* pattern finally *)
-
-type kindex = Token.t (* pattern index *)
-
-type kimplements = Token.t (* pattern implements *)
-
-type kinterrupt = Token.t (* pattern interrupt *)
-
-type pat_588cb21 =
-  Token.t (* pattern [-+]?[0-9]*\.?[0-9]+([eE][+-]?[0-9]+)? *)
-
-type kor = Token.t (* pattern or *)
+type pat_cdd9bad = Token.t (* pattern "'[^']*'" *)
 
 type kdestructor = Token.t (* pattern destructor *)
 
-type ppelse = Token.t
+type kinterface = Token.t (* pattern interface *)
 
 type kunit = Token.t (* pattern unit *)
 
-type kcase = Token.t (* pattern case *)
+type kvarargs = Token.t (* pattern varargs *)
+
+type kinline = Token.t (* pattern inline *)
 
 type kis = Token.t (* pattern is *)
 
 type kprogram = Token.t (* pattern program *)
 
-type kvirtual = Token.t (* pattern virtual *)
+type kfile = Token.t (* pattern file *)
 
-type knostackframe = Token.t (* pattern nostackframe *)
-
-type kplatform = Token.t (* pattern platform *)
+type koptional = Token.t (* pattern optional *)
 
 type kgoto = Token.t (* pattern goto *)
 
-type kstdcall = Token.t (* pattern stdcall *)
+type ppelse = Token.t
 
-type karray = Token.t (* pattern array *)
+type kto = Token.t (* pattern to *)
 
-type kdo = Token.t (* pattern do *)
+type kcontains = Token.t (* pattern contains *)
 
-type kconstref = Token.t (* pattern constref *)
+type kfalse = Token.t (* pattern false *)
 
-type kon = Token.t (* pattern on *)
-
-type klocal = Token.t (* pattern local *)
-
-type kwhile = Token.t (* pattern while *)
-
-type kdefault = Token.t (* pattern default *)
-
-type kpublished = Token.t (* pattern published *)
-
-type kcvar = Token.t (* pattern cvar *)
+type pat_8c6847e = Token.t (* pattern "'[^'\\r\\n]*'" *)
 
 type ksealed = Token.t (* pattern sealed *)
 
-type kuntil = Token.t (* pattern until *)
-
-type krequires = Token.t (* pattern requires *)
-
-type kwrite = Token.t (* pattern write *)
-
-type ppfragmentstmt = Token.t
-
-type krecord = Token.t (* pattern record *)
+type knil = Token.t (* pattern nil *)
 
 type kpascal = Token.t (* pattern pascal *)
 
-type kprivate = Token.t (* pattern private *)
+type pat_770128e = Token.t (* pattern "\"[^\"\\r\\n]*\"" *)
 
-type kms_abi_default = Token.t (* pattern ms_abi_default *)
+type kinitialization = Token.t (* pattern initialization *)
 
-type kout = Token.t (* pattern out *)
+type ksoftfloat = Token.t (* pattern softfloat *)
+
+type kdynamic = Token.t (* pattern dynamic *)
+
+type kread = Token.t (* pattern read *)
+
+type krequires = Token.t (* pattern requires *)
+
+type kimplementation = Token.t (* pattern implementation *)
+
+type kwrite = Token.t (* pattern write *)
+
+type kconstref = Token.t (* pattern constref *)
+
+type kexternal = Token.t (* pattern external *)
+
+type knostackframe = Token.t (* pattern nostackframe *)
+
+type kname = Token.t (* pattern name *)
+
+type kpacked = Token.t (* pattern packed *)
+
+type kobjcprotocol = Token.t (* pattern objcprotocol *)
+
+type kexports = Token.t (* pattern exports *)
+
+type tok_prec_p5_pat_ef0cc7f = Token.t
+
+type kelse = Token.t (* pattern else *)
+
+type krequired = Token.t (* pattern required *)
+
+type kor = Token.t (* pattern or *)
+
+type khelper = Token.t (* pattern helper *)
+
+type klocal = Token.t (* pattern local *)
+
+type kvectorcall = Token.t (* pattern vectorcall *)
+
+type kshr = Token.t (* pattern shr *)
+
+type kexport = Token.t (* pattern export *)
+
+type kon = Token.t (* pattern on *)
+
+type kxor = Token.t (* pattern xor *)
+
+type kcppdecl = Token.t (* pattern cppdecl *)
+
+type kdownto = Token.t (* pattern downto *)
+
+type kregister = Token.t (* pattern register *)
+
+type pat_588cb21 =
+  Token.t (* pattern [-+]?[0-9]*\.?[0-9]+([eE][+-]?[0-9]+)? *)
+
+type knodefault = Token.t (* pattern nodefault *)
+
+type ktrue = Token.t (* pattern true *)
+
+type tok_prec_p5_pat_0a9b8cd = Token.t
+
+type kfor = Token.t (* pattern for *)
+
+type kinherited = Token.t (* pattern inherited *)
 
 type identifier =
   Token.t (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *)
 
-type kreadonly = Token.t (* pattern readonly *)
-
-type kraise = Token.t (* pattern raise *)
-
-type kregister = Token.t (* pattern register *)
-
-type kwinapi = Token.t (* pattern winapi *)
-
-type kalias = Token.t (* pattern alias *)
-
-type kdelayed = Token.t (* pattern delayed *)
-
-type kreintroduce = Token.t (* pattern reintroduce *)
-
-type kforward = Token.t (* pattern forward *)
-
-type kmessage = Token.t (* pattern message *)
-
-type koverload = Token.t (* pattern overload *)
-
-type kcppdecl = Token.t (* pattern cppdecl *)
-
-type kfinalization = Token.t (* pattern finalization *)
-
-type kspecialize = Token.t (* pattern specialize *)
-
-type ktry = Token.t (* pattern try *)
-
-type kstatic = Token.t (* pattern static *)
-
-type ksysv_abi_default = Token.t (* pattern sysv_abi_default *)
-
-type kexcept = Token.t (* pattern except *)
-
-type knodefault = Token.t (* pattern nodefault *)
-
-type tok_prec_p5_pat_b66c674 = Token.t
-
-type ksoftfloat = Token.t (* pattern softfloat *)
-
-type kobjccategory = Token.t (* pattern objccategory *)
-
-type koverride = Token.t (* pattern override *)
-
-type kproperty = Token.t (* pattern property *)
-
-type kelse = Token.t (* pattern else *)
-
-type kstored = Token.t (* pattern stored *)
-
-type pat_6c79139 =
-  Token.t (* pattern "'''[ \\t]*\\r?\\n([^']|'[^']|''[^'])*'''" *)
-
-type ppfragmentexpr = Token.t
-
-type imm_tok_pat_d238afd = Token.t (* pattern \$[a-fA-F0-9]+ *)
-
-type kclass = Token.t (* pattern class *)
-
-type kprotected = Token.t (* pattern protected *)
-
-type tok_prec_p5_pat_af36d87 = Token.t
-
-type kdispinterface = Token.t (* pattern dispinterface *)
-
-type kvectorcall = Token.t (* pattern vectorcall *)
-
-type pat_f7c0026 = Token.t (* pattern \([^*]|\) *)
-
-type knear = Token.t (* pattern near *)
-
-type ktype = Token.t (* pattern type *)
-
-type kimplementation = Token.t (* pattern implementation *)
-
-type kresourcestring = Token.t (* pattern resourcestring *)
-
-type ksafecall = Token.t (* pattern safecall *)
-
-type kend = Token.t (* pattern end *)
-
 type kin = Token.t (* pattern in *)
 
-type kmod = Token.t (* pattern mod *)
+type kiocheck = Token.t (* pattern iocheck *)
 
-type kdispid = Token.t (* pattern dispid *)
-
-type khardfloat = Token.t (* pattern hardfloat *)
-
-type kname = Token.t (* pattern name *)
-
-type kstring = Token.t (* pattern string *)
-
-type kas = Token.t (* pattern as *)
-
-type khelper = Token.t (* pattern helper *)
-
-type kpublic = Token.t (* pattern public *)
-
-type kxor = Token.t (* pattern xor *)
-
-type kms_abi_cdecl = Token.t (* pattern ms_abi_cdecl *)
-
-type kasm = Token.t (* pattern asm *)
+type pat_6a71975 = Token.t (* pattern [.,:;+\-*\/\[\]<>&%$@=^!#~|?] *)
 
 type ppif = Token.t
 
 type kotherwise = Token.t (* pattern otherwise *)
 
-type kread = Token.t (* pattern read *)
+type kdispid = Token.t (* pattern dispid *)
 
 type ksysv_abi_cdecl = Token.t (* pattern sysv_abi_cdecl *)
 
-type kand = Token.t (* pattern and *)
+type kuntil = Token.t (* pattern until *)
 
-type kdiv = Token.t (* pattern div *)
+type kcdecl = Token.t (* pattern cdecl *)
 
-type kfile = Token.t (* pattern file *)
+type klabel = Token.t (* pattern label *)
 
-type kfunction = Token.t (* pattern function *)
+type kproperty = Token.t (* pattern property *)
 
-type kabsolute = Token.t (* pattern absolute *)
-
-type kstrict = Token.t (* pattern strict *)
-
-type tok_prec_p5_pat_6f93d17 = Token.t
-
-type imm_tok_pat_ec19546 = Token.t (* pattern [-+]?[0-9]+ *)
+type kwhile = Token.t (* pattern while *)
 
 type knot = Token.t (* pattern not *)
 
+type kprivate = Token.t (* pattern private *)
+
+type kstored = Token.t (* pattern stored *)
+
+type kas = Token.t (* pattern as *)
+
+type kconstructor = Token.t (* pattern constructor *)
+
+type kmwpascal = Token.t (* pattern mwpascal *)
+
+type koperator = Token.t (* pattern operator *)
+
+type kwinapi = Token.t (* pattern winapi *)
+
+type kdelayed = Token.t (* pattern delayed *)
+
+type kraise = Token.t (* pattern raise *)
+
+type kdefault = Token.t (* pattern default *)
+
+type kset = Token.t (* pattern set *)
+
+type kuses = Token.t (* pattern uses *)
+
+type kresourcestring = Token.t (* pattern resourcestring *)
+
+type kwriteonly = Token.t
+
+type ppfragmentexpr = Token.t
+
+type kreference = Token.t (* pattern reference *)
+
+type kplatform = Token.t (* pattern platform *)
+
+type kprocedure = Token.t (* pattern procedure *)
+
+type koverload = Token.t (* pattern overload *)
+
+type imm_tok_pat_d238afd = Token.t (* pattern \$[a-fA-F0-9]+ *)
+
+type krecord = Token.t (* pattern record *)
+
+type kraiseat = Token.t
+
+type kreintroduce = Token.t (* pattern reintroduce *)
+
+type kwith = Token.t (* pattern with *)
+
+type kand = Token.t (* pattern and *)
+
+type kdeprecated = Token.t (* pattern deprecated *)
+
+type krepeat = Token.t (* pattern repeat *)
+
+type pat_238b233 = Token.t (* pattern [0-9][0-9a-fA-F]*[hH]? *)
+
+type kfunction = Token.t (* pattern function *)
+
+type kmod = Token.t (* pattern mod *)
+
+type koverride = Token.t (* pattern override *)
+
+type kcvar = Token.t (* pattern cvar *)
+
+type kfinally = Token.t (* pattern finally *)
+
+type kstatic = Token.t (* pattern static *)
+
+type ktype = Token.t (* pattern type *)
+
+type kstdcall = Token.t (* pattern stdcall *)
+
+type kabsolute = Token.t (* pattern absolute *)
+
+type kexcept = Token.t (* pattern except *)
+
+type kmessage = Token.t (* pattern message *)
+
 type kthen = Token.t (* pattern then *)
+
+type kexperimental = Token.t (* pattern experimental *)
+
+type knoreturn = Token.t (* pattern noreturn *)
+
+type tok_prec_p5_pat_b66c674 = Token.t
+
+type kspecialize = Token.t (* pattern specialize *)
+
+type kobjcclass = Token.t (* pattern objcclass *)
+
+type kpackage = Token.t (* pattern package *)
+
+type kprotected = Token.t (* pattern protected *)
+
+type kend = Token.t (* pattern end *)
+
+type kstrict = Token.t (* pattern strict *)
+
+type pat_6c79139 =
+  Token.t (* pattern "'''[ \\t]*\\r?\\n([^']|'[^']|''[^'])*'''" *)
+
+type ppendif = Token.t
+
+type imm_tok_pat_ec19546 = Token.t (* pattern [-+]?[0-9]+ *)
+
+type kconst = Token.t (* pattern const *)
+
+type kpublic = Token.t (* pattern public *)
+
+type tok_prec_p5_pat_af36d87 = Token.t
+
+type kdiv = Token.t (* pattern div *)
+
+type kvirtual = Token.t (* pattern virtual *)
+
+type pat_cafba40 = Token.t (* pattern [0-9a-fA-F] *)
+
+type kunimplemented = Token.t (* pattern unimplemented *)
+
+type kimplements = Token.t (* pattern implements *)
+
+type ksafecall = Token.t (* pattern safecall *)
+
+type ksaveregisters = Token.t (* pattern saveregisters *)
+
+type kindex = Token.t (* pattern index *)
+
+type kms_abi_cdecl = Token.t (* pattern ms_abi_cdecl *)
+
+type kalias = Token.t (* pattern alias *)
+
+type kdispinterface = Token.t (* pattern dispinterface *)
+
+type knear = Token.t (* pattern near *)
+
+type kasm = Token.t (* pattern asm *)
+
+type kif = Token.t (* pattern if *)
+
+type kpublished = Token.t (* pattern published *)
+
+type khardfloat = Token.t (* pattern hardfloat *)
+
+type kms_abi_default = Token.t (* pattern ms_abi_default *)
 
 type kassembler = Token.t (* pattern assembler *)
 
-type kfor = Token.t (* pattern for *)
+type ppfragmentstmt = Token.t
+
+type kout = Token.t (* pattern out *)
+
+type kreadonly = Token.t
+
+type ksysv_abi_default = Token.t (* pattern sysv_abi_default *)
+
+type karray = Token.t (* pattern array *)
+
+type kdo = Token.t (* pattern do *)
+
+type kfinalization = Token.t (* pattern finalization *)
+
+type kgeneric = Token.t (* pattern generic *)
+
+type kabstract = Token.t (* pattern abstract *)
+
+type kstring = Token.t (* pattern string *)
+
+type tok_prec_p5_pat_6f93d17 = Token.t
+
+type imm_tok_pat_f57674d = Token.t (* pattern %[01]+ *)
+
+type kobjccategory = Token.t (* pattern objccategory *)
+
+type kthreadvar = Token.t (* pattern threadvar *)
+
+type kforward = Token.t (* pattern forward *)
 
 type anon_choice_kto_86c5a40 = [
     `Kto of kto (*tok*)
@@ -349,6 +353,18 @@ type anon_choice_kto_86c5a40 = [
 ]
 
 type literalfloat = pat_588cb21
+
+type anon_choice_kelse_d520062 = [
+    `Kelse of kelse (*tok*)
+  | `Koth of kotherwise (*tok*)
+]
+
+type exprisnot = (kis (*tok*) * knot (*tok*))
+
+type anon_choice_kpro_f69e586 = [
+    `Kpro of kprocedure (*tok*)
+  | `Kfun of kfunction (*tok*)
+]
 
 type anon_choice_kstd_a801c0a = [
     `Kstd of kstdcall (*tok*)
@@ -369,16 +385,6 @@ type visibility = [
   | `Kpub_659fa63 of kpublic (*tok*)
   | `Kpro of kprotected (*tok*)
   | `Kpri of kprivate (*tok*)
-]
-
-type anon_choice_kelse_d520062 = [
-    `Kelse of kelse (*tok*)
-  | `Koth of kotherwise (*tok*)
-]
-
-type anon_choice_kpro_f69e586 = [
-    `Kpro of kprocedure (*tok*)
-  | `Kfun of kfunction (*tok*)
 ]
 
 type literalint = [
@@ -411,21 +417,18 @@ type operatorname_ = [
   | `Kin of kin (*tok*)
 ]
 
-type exprisnot = (kis (*tok*) * knot (*tok*))
-
 type asmbody =
   [
       `Id of identifier (*tok*)
+    | `Pat_238b233 of pat_238b233
     | `Pat_cafba40 of pat_cafba40
-    | `Pat_3ea53fb of pat_3ea53fb
-    | `Pat_f7c0026 of pat_f7c0026
+    | `Pat_8c6847e of pat_8c6847e
+    | `Pat_770128e of pat_770128e
+    | `Pat_6a71975 of pat_6a71975
+    | `LPAR of Token.t (* "(" *)
+    | `RPAR of Token.t (* ")" *)
   ]
     list (* one or more *)
-
-type modulename = (
-    (identifier (*tok*) * Token.t (* "." *)) list (* one or more *) option
-  * identifier (*tok*)
-)
 
 type anon_opt_rep1_decl_COMMA_64c033f =
   (identifier (*tok*) * Token.t (* "," *)) list (* one or more *) option
@@ -434,6 +437,11 @@ type propaccessor = [
     `Id of identifier (*tok*)
   | `Prop of (propaccessor * Token.t (* "." *) * identifier (*tok*))
 ]
+
+type modulename = (
+    (identifier (*tok*) * Token.t (* "." *)) list (* one or more *) option
+  * identifier (*tok*)
+)
 
 type label = (identifier (*tok*) * Token.t (* ":" *))
 
@@ -465,6 +473,11 @@ type literalnumber = [
 
 type asmtr = (kasm (*tok*) * asmbody option * kend (*tok*))
 
+type decllabels = (
+    klabel (*tok*) * anon_opt_rep1_decl_COMMA_64c033f * identifier (*tok*)
+  * Token.t (* ";" *)
+)
+
 type anon_choice_modu_eefd7e7 = [
     `Modu of modulename
   | `Ppus of ppusesblock
@@ -480,11 +493,6 @@ and ppusesblock = (
     )
       list (* zero or more *)
   * tok_prec_p5_pat_ef0cc7f (*tok*)
-)
-
-type decllabels = (
-    klabel (*tok*) * anon_opt_rep1_decl_COMMA_64c033f * identifier (*tok*)
-  * Token.t (* ";" *)
 )
 
 type literalstring_ = [
@@ -508,28 +516,18 @@ type ppusesblockwithsemi = (
 
 type literalstring = literalstring_ list (* one or more *)
 
+type hintdirective = [
+    `Kdep_opt_lite of (kdeprecated (*tok*) * literalstring option)
+  | `Kpla of kplatform (*tok*)
+  | `Kexp of kexperimental (*tok*)
+]
+
 type literal = [
     `Lite_4d69a90 of literalstring
   | `Lite_f64c399 of literalnumber
   | `Knil of knil (*tok*)
   | `Ktrue of ktrue (*tok*)
   | `Kfalse of kfalse (*tok*)
-]
-
-type subrangebound = [
-    `Lite_f64c399 of literalnumber
-  | `Choice_DASH_lite of (
-        [ `DASH of Token.t (* "-" *) | `PLUS of Token.t (* "+" *) ]
-      * literalnumber
-    )
-  | `Lite_4d69a90 of literalstring
-  | `Type_ of typeref_
-]
-
-type hintdirective = [
-    `Kdep_opt_lite of (kdeprecated (*tok*) * literalstring option)
-  | `Kpla of kplatform (*tok*)
-  | `Kexp of kexperimental (*tok*)
 ]
 
 type moduleinfile = (modulename * kin (*tok*) * literalstring)
@@ -565,6 +563,14 @@ type anon_LPAR_opt_opt_rep1_type_COMMA_type_RPAR_116e8a8 = (
 )
 
 and anon_choice_bloc_1cb9769 = [ `Bloc of blocktr | `Asmtr of asmtr ]
+
+and anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07 = [
+    `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa of (
+        anon_choice_kvar_df0f889 * anon_opt_rep1_decl_COMMA_64c033f
+      * identifier (*tok*) * anon_opt_COLON_type_opt_defa_30ea779
+    )
+  | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa of declvariantfield
+]
 
 and anon_choice_decl_fe4bcc4 = [
     `Decl_c64a659 of decltype
@@ -623,6 +629,13 @@ and anon_choice_kexc_opt_choice_stat__d8e7a89 = [
   | `Kfin_opt_stat_ of (kfinally (*tok*) * statementstr_ option)
 ]
 
+and anon_choice_kvar_df0f889 = [
+    `Kvar of kvar (*tok*)
+  | `Kout of kout (*tok*)
+  | `Kcon of kconstref (*tok*)
+  | `Kconst_opt_rttias of (kconst (*tok*) * rttiattributes option)
+]
+
 and anon_choice_proc__b0bc660 = [
     `Proc_ of procattribute_
   | `Proc of procexternal
@@ -630,7 +643,7 @@ and anon_choice_proc__b0bc660 = [
 
 and anon_choice_range_ff5eaed = [ `Range of range | `Expr of expr ]
 
-and anon_choice_stat_2a62092 = [ `Stat of statementtr | `If of nestediftr ]
+and anon_choice_stat_2a62092 = [ `Stat of statementtr | `If of nestedif ]
 
 and anon_choice_stat__f368a69 = [
     `Stat_ of statementstr_
@@ -640,6 +653,16 @@ and anon_choice_stat__f368a69 = [
       * exceptionelse option
     )
 ]
+
+and anon_choice_type_22ff6c5 = [
+    `Type of typeref
+  | `Kclass of kclass (*tok*)
+  | `Krec of krecord (*tok*)
+  | `Kcon of kconstructor (*tok*)
+]
+
+and anon_opt_COLON_type_opt_defa_30ea779 =
+  (Token.t (* ":" *) * type_ * defaultvalue option) option
 
 and anon_opt_kdep_opt_expr_9e396fa =
   (kdeprecated (*tok*) * expr option) option
@@ -699,24 +722,20 @@ and classdeclarations =
   ]
     list (* one or more *)
 
+and constdef = (
+    kconst (*tok*)
+  * identifier (*tok*)
+  * (Token.t (* ":" *) * type_) option
+  * defaultvalue
+)
+
 and declarg = [
-    `Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa of [
-        `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa of (
-            [
-                `Kvar of kvar (*tok*)
-              | `Kout of kout (*tok*)
-              | `Kcon of kconstref (*tok*)
-              | `Kconst_opt_rttias of (
-                    kconst (*tok*)
-                  * rttiattributes option
-                )
-            ]
-          * anon_opt_rep1_decl_COMMA_64c033f
-          * identifier (*tok*)
-          * (Token.t (* ":" *) * type_ * defaultvalue option) option
-        )
-      | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa of declvariantfield
-    ]
+    `Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa of
+      anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07
+  | `Rttias_choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa of (
+        rttiattributes
+      * anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07
+    )
   | `Semg_ellips of Token.t (* "..." *)
 ]
 
@@ -724,6 +743,25 @@ and declargs = (
     Token.t (* "(" *)
   * (anon_opt_rep1_decl_SEMI_bce1ef3 * declarg) option
   * Token.t (* ")" *)
+)
+
+and declarray = (
+    kpacked (*tok*) option
+  * karray (*tok*)
+  * (
+        Token.t (* "[" *)
+      * (
+            (anon_choice_range_ff5eaed * Token.t (* "," *))
+              list (* one or more *)
+              option
+          * anon_choice_range_ff5eaed
+        )
+          option
+      * Token.t (* "]" *)
+    )
+      option
+  * kof (*tok*)
+  * type_
 )
 
 and declclass = (
@@ -868,6 +906,15 @@ and declprocfwd = (
   * procattribute list (* zero or more *)
 )
 
+and declprocref = (
+    (kreference (*tok*) * kto (*tok*)) option
+  * anon_choice_kpro_f69e586
+  * declargs option
+  * (Token.t (* ":" *) * typeref) option
+  * (kof (*tok*) * kobject (*tok*)) option
+  * anon_choice_kstd_a801c0a option
+)
+
 and declprop = (
     rttiattributes option
   * kclass (*tok*) option
@@ -902,12 +949,20 @@ and declpropargs = (
   * Token.t (* "]" *)
 )
 
+and declrecordinline = (
+    kpacked (*tok*) option
+  * krecord (*tok*)
+  * declclass_
+)
+
 and declsection = (
     kstrict (*tok*) option
   * anon_choice_visi_5a3c750
   * declfields option
   * classdeclarations option
 )
+
+and declset = (kset (*tok*) * kof (*tok*) * type_)
 
 and decltype = (
     rttiattributes option
@@ -1101,9 +1156,15 @@ and exprunary = [
 ]
 
 and genericarg = (
-    anon_opt_rep1_decl_COMMA_64c033f
+    (identifier (*tok*) * Token.t (* "," *)) list (* zero or more *)
   * identifier (*tok*)
-  * (Token.t (* ":" *) * typeref) option
+  * (
+        Token.t (* ":" *)
+      * (anon_choice_type_22ff6c5 * Token.t (* "," *))
+          list (* zero or more *)
+      * anon_choice_type_22ff6c5
+    )
+      option
   * defaultvalue option
 )
 
@@ -1132,7 +1193,7 @@ and initializer_ = [
 
 and legacyformat = (Token.t (* ":" *) * expr) list (* one or more *)
 
-and nestediftr = if_
+and nestedif = if_
 
 and operatordot = (genericname * Token.t (* "." *) * operatorname_)
 
@@ -1340,7 +1401,7 @@ and statement = [
   | `Assign_SEMI of (assignment * Token.t (* ";" *))
   | `Vardef_SEMI of (vardef * Token.t (* ";" *))
   | `Stmt_ of statement_
-  | `If of nestediftr
+  | `If of nestedif
   | `Ifelse of (
         kif (*tok*)
       * expr
@@ -1405,6 +1466,8 @@ and statement = [
       * kend (*tok*)
       * Token.t (* ";" *)
     )
+  | `Vard_SEMI of (vardefmulti * Token.t (* ";" *))
+  | `Cons_SEMI of (constdef * Token.t (* ";" *))
   | `Semg_ellips of Token.t (* "..." *)
 ]
 
@@ -1493,6 +1556,19 @@ and statementtr = [
 
 and statementtr_ = [ `Expr of expr ]
 
+and subrangebound = [
+    `Lite_f64c399 of literalnumber
+  | `Choice_DASH_lite of (
+        [ `DASH of Token.t (* "-" *) | `PLUS of Token.t (* "+" *) ]
+      * literalnumber
+    )
+  | `Lite_4d69a90 of literalstring
+  | `Type_ of typeref_
+  | `Subr of (
+        identifier (*tok*) * Token.t (* "(" *) * exprargs * Token.t (* ")" *)
+    )
+]
+
 and type_ = [
     `Type of typeref
   | `Decl_172a5fa of (kclass (*tok*) * kof (*tok*) * typeref)
@@ -1502,41 +1578,17 @@ and type_ = [
       * declenumvalue
       * Token.t (* ")" *)
     )
-  | `Decl_9b757b1 of (kset (*tok*) * kof (*tok*) * type_)
-  | `Decl_fb3a596 of (
-        kpacked (*tok*) option
-      * karray (*tok*)
-      * (
-            Token.t (* "[" *)
-          * (
-                (anon_choice_range_ff5eaed * Token.t (* "," *))
-                  list (* one or more *)
-                  option
-              * anon_choice_range_ff5eaed
-            )
-              option
-          * Token.t (* "]" *)
-        )
-          option
-      * kof (*tok*)
-      * type_
-    )
+  | `Decl_9b757b1 of declset
+  | `Decl_fb3a596 of declarray
   | `Decl_d33f432 of (kfile (*tok*) * (kof (*tok*) * type_) option)
   | `Decl_4e1d441 of (
         kstring (*tok*)
       * (Token.t (* "[" *) * [ `Expr of expr ] * Token.t (* "]" *)) option
       * anon_opt_kdep_opt_expr_9e396fa
     )
-  | `Decl_4eec7e9 of (
-        (kreference (*tok*) * kto (*tok*)) option
-      * anon_choice_kpro_f69e586
-      * declargs option
-      * (Token.t (* ":" *) * typeref) option
-      * (kof (*tok*) * kobject (*tok*)) option
-      * anon_choice_kstd_a801c0a option
-    )
+  | `Decl_4eec7e9 of declprocref
   | `Decl_0ebbf4b of (subrangebound * Token.t (* ".." *) * subrangebound)
-  | `Decl_dd9f703 of (kpacked (*tok*) option * krecord (*tok*) * declclass_)
+  | `Decl_dd9f703 of declrecordinline
 ]
 
 and typeref = (
@@ -1549,14 +1601,29 @@ and vardef = (
     kvar (*tok*) * identifier (*tok*) * Token.t (* ":" *) * typeref
 )
 
-type library = (
-    klibrary (*tok*)
-  * modulename
-  * Token.t (* ";" *)
-  * definitions option
-  * [ `Bloc of blocktr | `Kend of kend (*tok*) ]
-  * Token.t (* "." *)
+and vardefmulti = (
+    kvar (*tok*)
+  * [
+        `Id_rep1_COMMA_id_COLON_type of (
+            identifier (*tok*)
+          * (Token.t (* "," *) * identifier (*tok*)) list (* one or more *)
+          * Token.t (* ":" *)
+          * type_
+        )
+      | `Id_COLON_choice_decl of (
+            identifier (*tok*)
+          * Token.t (* ":" *)
+          * [
+                `Decl_fb3a596 of declarray
+              | `Decl_9b757b1 of declset
+              | `Decl_4eec7e9 of declprocref
+              | `Decl_dd9f703 of declrecordinline
+            ]
+        )
+    ]
 )
+
+type implementation = (kimplementation (*tok*) * definitions option)
 
 type declarations =
   [
@@ -1574,19 +1641,6 @@ type declarations =
   ]
     list (* one or more *)
 
-type implementation = (kimplementation (*tok*) * definitions option)
-
-type finalization = (kfinalization (*tok*) * statementstr_ option)
-
-type program = (
-    kprogram (*tok*)
-  * modulename
-  * Token.t (* ";" *)
-  * definitions option
-  * blocktr
-  * Token.t (* "." *)
-)
-
 type statements =
   [
       `Vardef of vardef
@@ -1598,6 +1652,26 @@ type statements =
     list (* one or more *)
 
 type initialization = (kinitialization (*tok*) * statementstr_ option)
+
+type program = (
+    kprogram (*tok*)
+  * modulename
+  * Token.t (* ";" *)
+  * definitions option
+  * blocktr
+  * Token.t (* "." *)
+)
+
+type library = (
+    klibrary (*tok*)
+  * modulename
+  * Token.t (* ";" *)
+  * definitions option
+  * [ `Bloc of blocktr | `Kend of kend (*tok*) ]
+  * Token.t (* "." *)
+)
+
+type finalization = (kfinalization (*tok*) * statementstr_ option)
 
 type interface = (kinterface (*tok*) * declarations option)
 
@@ -1669,64 +1743,64 @@ type root = [
     )
 ]
 
-type kat (* inlined *) = Token.t (* "@" *)
-
-type ppdirective (* inlined *) = Token.t
-
 type comment (* inlined *) = Token.t
-
-type klt (* inlined *) = Token.t (* "<" *)
-
-type kfdiv (* inlined *) = Token.t (* "/" *)
-
-type kneq (* inlined *) = Token.t (* "<>" *)
-
-type kassignadd (* inlined *) = Token.t (* "+=" *)
-
-type khat (* inlined *) = Token.t (* "^" *)
-
-type kdot (* inlined *) = Token.t (* "." *)
-
-type ksub (* inlined *) = Token.t (* "-" *)
-
-type kmul (* inlined *) = Token.t (* "*" *)
-
-type keq (* inlined *) = Token.t (* "=" *)
 
 type klte (* inlined *) = Token.t (* "<=" *)
 
-type kassignsub (* inlined *) = Token.t (* "-=" *)
+type kassigndiv (* inlined *) = Token.t (* "/=" *)
 
-type kassignmul (* inlined *) = Token.t (* "*=" *)
-
-type kenddot (* inlined *) = Token.t (* "." *)
-
-type kassign (* inlined *) = Token.t (* ":=" *)
-
-type kgt (* inlined *) = Token.t (* ">" *)
-
-type semgrep_ellipsis (* inlined *) = Token.t (* "..." *)
+type kfdiv (* inlined *) = Token.t (* "/" *)
 
 type kadd (* inlined *) = Token.t (* "+" *)
 
+type semgrep_ellipsis (* inlined *) = Token.t (* "..." *)
+
+type ppdirective (* inlined *) = Token.t
+
+type kgt (* inlined *) = Token.t (* ">" *)
+
+type kdot (* inlined *) = Token.t (* "." *)
+
+type klt (* inlined *) = Token.t (* "<" *)
+
+type kmul (* inlined *) = Token.t (* "*" *)
+
+type kat (* inlined *) = Token.t (* "@" *)
+
 type space (* inlined *) = Token.t (* pattern [\s\r\n\t﻿]+ *)
+
+type kassignsub (* inlined *) = Token.t (* "-=" *)
+
+type keq (* inlined *) = Token.t (* "=" *)
+
+type kassignadd (* inlined *) = Token.t (* "+=" *)
 
 type kgte (* inlined *) = Token.t (* ">=" *)
 
-type kassigndiv (* inlined *) = Token.t (* "/=" *)
+type kneq (* inlined *) = Token.t (* "<>" *)
+
+type kenddot (* inlined *) = Token.t (* "." *)
+
+type khat (* inlined *) = Token.t (* "^" *)
+
+type ksub (* inlined *) = Token.t (* "-" *)
+
+type kassignmul (* inlined *) = Token.t (* "*=" *)
+
+type kassign (* inlined *) = Token.t (* ":=" *)
 
 type decllabel (* inlined *) = identifier (*tok*)
-
-type gototr (* inlined *) = (kgoto (*tok*) * identifier (*tok*))
-
-type goto (* inlined *) = (
-    kgoto (*tok*) * identifier (*tok*) * Token.t (* ";" *)
-)
 
 type inherited (* inlined *) = (
     kinherited (*tok*)
   * identifier (*tok*) option
 )
+
+type goto (* inlined *) = (
+    kgoto (*tok*) * identifier (*tok*) * Token.t (* ";" *)
+)
+
+type gototr (* inlined *) = (kgoto (*tok*) * identifier (*tok*))
 
 type propaccessordot (* inlined *) = (
     propaccessor * Token.t (* "." *) * identifier (*tok*)
@@ -1747,10 +1821,6 @@ type asm (* inlined *) = (
   * asmbody option
   * kend (*tok*)
   * Token.t (* ";" *)
-)
-
-type declsubrange (* inlined *) = (
-    subrangebound * Token.t (* ".." *) * subrangebound
 )
 
 type package (* inlined *) = (
@@ -1804,25 +1874,6 @@ type casetr (* inlined *) = (
   * kend (*tok*)
 )
 
-type declarray (* inlined *) = (
-    kpacked (*tok*) option
-  * karray (*tok*)
-  * (
-        Token.t (* "[" *)
-      * (
-            (anon_choice_range_ff5eaed * Token.t (* "," *))
-              list (* one or more *)
-              option
-          * anon_choice_range_ff5eaed
-        )
-          option
-      * Token.t (* "]" *)
-    )
-      option
-  * kof (*tok*)
-  * type_
-)
-
 type declenum (* inlined *) = (
     Token.t (* "(" *)
   * (declenumvalue * Token.t (* "," *)) list (* one or more *) option
@@ -1834,27 +1885,14 @@ type declfile (* inlined *) = (kfile (*tok*) * (kof (*tok*) * type_) option)
 
 type declmetaclass (* inlined *) = (kclass (*tok*) * kof (*tok*) * typeref)
 
-type declprocref (* inlined *) = (
-    (kreference (*tok*) * kto (*tok*)) option
-  * anon_choice_kpro_f69e586
-  * declargs option
-  * (Token.t (* ":" *) * typeref) option
-  * (kof (*tok*) * kobject (*tok*)) option
-  * anon_choice_kstd_a801c0a option
-)
-
-type declrecordinline (* inlined *) = (
-    kpacked (*tok*) option
-  * krecord (*tok*)
-  * declclass_
-)
-
-type declset (* inlined *) = (kset (*tok*) * kof (*tok*) * type_)
-
 type declstring (* inlined *) = (
     kstring (*tok*)
   * (Token.t (* "[" *) * [ `Expr of expr ] * Token.t (* "]" *)) option
   * anon_opt_kdep_opt_expr_9e396fa
+)
+
+type declsubrange (* inlined *) = (
+    subrangebound * Token.t (* ".." *) * subrangebound
 )
 
 type deep_ellipsis (* inlined *) = (
@@ -2009,6 +2047,10 @@ type repeattr (* inlined *) = (
   * expr
 )
 
+type subrangecall (* inlined *) = (
+    identifier (*tok*) * Token.t (* "(" *) * exprargs * Token.t (* ")" *)
+)
+
 type try_ (* inlined *) = (
     ktry (*tok*)
   * statementstr_ option
@@ -2052,20 +2094,12 @@ type withtr (* inlined *) = (
   * statementtr option
 )
 
-type exceptionhandlers (* inlined *) = (
-    exceptionhandler list (* zero or more *)
-  * anon_choice_exce_8373abe
-  * exceptionelse option
-)
+type nestediftr (* inlined *) = if_
 
-type semgrep_expression (* inlined *) = (
-    Token.t (* "__SEMGREP_EXPRESSION" *) * expr
-)
-
-type nestedif (* inlined *) = if_
-
-type semgrep_statements (* inlined *) = (
-    Token.t (* "__SEMGREP_STATEMENTS" *) * statementstr_
+type exceptionelsetr (* inlined *) = (
+    kelse (*tok*)
+  * statement list (* zero or more *)
+  * statementtr option
 )
 
 type semgrep_declarations (* inlined *) = (
@@ -2087,10 +2121,18 @@ type semgrep_declarations (* inlined *) = (
       list (* one or more *)
 )
 
-type exceptionelsetr (* inlined *) = (
-    kelse (*tok*)
-  * statement list (* zero or more *)
-  * statementtr option
+type semgrep_statements (* inlined *) = (
+    Token.t (* "__SEMGREP_STATEMENTS" *) * statementstr_
+)
+
+type semgrep_expression (* inlined *) = (
+    Token.t (* "__SEMGREP_EXPRESSION" *) * expr
+)
+
+type exceptionhandlers (* inlined *) = (
+    exceptionhandler list (* zero or more *)
+  * anon_choice_exce_8373abe
+  * exceptionelse option
 )
 
 type statements_ (* inlined *) = statements

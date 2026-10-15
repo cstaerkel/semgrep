@@ -29,6 +29,13 @@ module.exports = grammar(base, {
   conflicts: ($, previous) => previous.concat([
     // needed once ocaml-tree-sitter un-hides these rules
     [$._classDeclarations, $._declFields],
+    // inline `const` statement vs. const section (inside {$IF} blocks)
+    [$.declConsts, $.constDef],
+    [$.declConst, $.constDef],
+    // inline `var A, B: T` statement vs. var section (inside {$IF} blocks)
+    [$.varDefMulti, $.declVar],
+    [$.varAssignDef, $.varDef, $.varDefMulti, $.declVars],
+    [$.varDefMulti, $.type],
   ]),
 
   rules: {
@@ -59,8 +66,7 @@ module.exports = grammar(base, {
       $.deep_ellipsis,
     ),
 
-    // procedure Foo(...);  procedure Foo(A: Integer; ...);
-    declArg: ($, previous) => choice(previous, $.semgrep_ellipsis),
+    // procedure Foo(...);  procedure Foo(A: Integer; ...);   (see declArg below)
 
     // ... between declarations: var/type/const sections, units, classes
     _definition: ($, previous) => choice(...previous.members, $.semgrep_ellipsis),
@@ -86,8 +92,7 @@ module.exports = grammar(base, {
       repeat(choice($.declType, $.ppBlock, $.semgrep_ellipsis))
     ),
     // A statement-level `...` does not need a trailing semicolon:
-    //   $X := TFoo.Create; ... $X.Free;
-    _statement: ($, previous) => choice(...previous.members, prec(-1, $.semgrep_ellipsis)),
+    //   $X := TFoo.Create; ... $X.Free;   (see _statement below)
 
     _usesClauseEntry: ($, previous) => choice(...previous.members, $.moduleInFile, $.semgrep_ellipsis),
 
@@ -171,8 +176,10 @@ module.exports = grammar(base, {
       field('operator', $.kDot),
       field('rhs', $.identifier)
     )),
-    kReadonly: $ => /readonly/i,
-    kWriteonly: $ => /writeonly/i,
+    // token precedence: otherwise `readonly` after a type is lexed as an
+    // identifier in some parser states (like kRaiseAt below)
+    kReadonly: $ => token(prec(1, /readonly/i)),
+    kWriteonly: $ => token(prec(1, /writeonly/i)),
 
     // Inline record types in var / field declarations:
     //   var Msg: packed record ... end;
@@ -206,12 +213,16 @@ module.exports = grammar(base, {
       ))),
     )),
 
-    // asm labels: @@Loop:
+    // asm labels: @@Loop:   operands: ('Z'-'A'), 2000000h, [ecx+edi*4]
     asmBody: $ => repeat1(choice(
       $.identifier,
+      /[0-9][0-9a-fA-F]*[hH]?/,
       /[0-9a-fA-F]/,
-      /[.,:;+\-*\[\]<>&%$@]/,
-      /\([^*]|\)/
+      /'[^'\r\n]*'/,
+      /"[^"\r\n]*"/,
+      /[.,:;+\-*\/\[\]<>&%$@=^!#~|?]/,
+      // `(*` still starts a comment (longest match)
+      '(', ')'
     )),
 
     // raise E at ReturnAddress;
@@ -269,11 +280,71 @@ module.exports = grammar(base, {
     ),
 
     // TFoo = 0..Count - 1;   TBar = 2..Succ(High(TDigit));
+    // TR = Low(TE)..High(TE);
     _subRangeBound: $ => choice(
       $.literalNumber,
       seq(choice('-', '+'), $.literalNumber),
       $.literalString,
       $._typeref,
+      alias($.subRangeCall, $.exprCall),
+    ),
+    // Only `Name(args)`, so that `(` alone still starts an enum type.
+    subRangeCall: $ => seq(
+      field('entity', $.identifier), '(', field('args', $.exprArgs), ')'
+    ),
+
+    // Inline variables (Delphi 10.3+) beyond upstream's `var X: T`:
+    //   var A, B: Integer;   var S: array[Boolean] of Integer;
+    // (a separate rule, so that `var X: T` keeps upstream's varDef shape)
+    varDefMulti: $ => seq(
+      $.kVar,
+      choice(
+        seq(
+          field('name', $.identifier),
+          repeat1(seq(',', field('name', $.identifier))),
+          ':',
+          field('type', $.type)
+        ),
+        seq(
+          field('name', $.identifier),
+          ':',
+          field('type', choice(
+            $.declArray, $.declSet, $.declProcRef,
+            alias($.declRecordInline, $.declClass)
+          ))
+        )
+      )
+    ),
+
+    // Inline constants (Delphi 10.3+):  const C = 'x';  const D: Integer = 1;
+    constDef: $ => seq(
+      $.kConst,
+      field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      field('defaultValue', $.defaultValue)
+    ),
+    _statement: ($, previous) => choice(
+      ...previous.members,
+      seq($.varDefMulti, ';'),
+      seq($.constDef, ';'),
+      prec(-1, $.semgrep_ellipsis)
+    ),
+
+    // function Get<T: class, constructor>: T;
+    // TFoo<T: record>, TBar<T: IFoo, constructor>
+    genericArg: $ => seq(
+      field('name', delimited1($.identifier)),
+      field('type', optional(seq(':', delimited1(choice(
+        $.typeref, $.kClass, $.kRecord, $.kConstructor
+      ))))),
+      field('defaultValue', optional($.defaultValue))
+    ),
+
+    // procedure Q([ref] const R: TRect);   (attribute before the modifier)
+    declArg: ($, previous) => choice(
+      previous,
+      seq($.rttiAttributes, previous),
+      $.semgrep_ellipsis
     ),
 
     // Delphi 12 multi-line strings: '''<newline> ... '''

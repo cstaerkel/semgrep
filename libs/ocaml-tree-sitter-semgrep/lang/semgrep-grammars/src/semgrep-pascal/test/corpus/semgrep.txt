@@ -589,3 +589,206 @@ var
       type: (type
         (typeref
           (identifier))))))
+
+==================================================
+Inline variables with several names or a structured type
+==================================================
+
+procedure P;
+begin
+  var A, B: Integer;
+  var S: array[Boolean] of Integer;
+end;
+
+---
+
+(root
+  (defProc
+    (declProc
+      (kProcedure)
+      (identifier))
+    (block
+      (kBegin)
+      (varDefMulti
+        (kVar)
+        (identifier)
+        (identifier)
+        (type
+          (typeref
+            (identifier))))
+      (varDefMulti
+        (kVar)
+        (identifier)
+        (declArray
+          (kArray)
+          (identifier)
+          (kOf)
+          (type
+            (typeref
+              (identifier)))))
+      (kEnd))))
+
+==================================================
+Inline constants
+==================================================
+
+procedure P;
+begin
+  const C = 'x';
+  const D: Integer = 1;
+end;
+
+---
+
+(root
+  (defProc
+    (declProc
+      (kProcedure)
+      (identifier))
+    (block
+      (kBegin)
+      (constDef
+        (kConst)
+        (identifier)
+        (defaultValue
+          (kEq)
+          (literalString)))
+      (constDef
+        (kConst)
+        (identifier)
+        (type
+          (typeref
+            (identifier)))
+        (defaultValue
+          (kEq)
+          (literalNumber)))
+      (kEnd))))
+
+==================================================
+Generic constraints
+==================================================
+
+type
+  TFactory = class
+    function Get<T: class, constructor>: T;
+    function GetRec<T: record>: T;
+  end;
+
+---
+
+(root
+  (declTypes
+    (kType)
+    (declType
+      (identifier)
+      (kEq)
+      (declClass
+        (kClass)
+        (declProc
+          (kFunction)
+          (genericTpl
+            (identifier)
+            (kLt)
+            (genericArgs
+              (genericArg
+                (identifier)
+                (kClass)
+                (kConstructor)))
+            (kGt))
+          (typeref
+            (identifier)))
+        (declProc
+          (kFunction)
+          (genericTpl
+            (identifier)
+            (kLt)
+            (genericArgs
+              (genericArg
+                (identifier)
+                (kRecord)))
+            (kGt))
+          (typeref
+            (identifier)))
+        (kEnd)))))
+
+==================================================
+Parameter attribute before modifier
+==================================================
+
+procedure Q([ref] const R: TRect);
+begin
+end;
+
+---
+
+(root
+  (defProc
+    (declProc
+      (kProcedure)
+      (identifier)
+      (declArgs
+        (declArg
+          (rttiAttributes
+            (identifier))
+          (kConst)
+          (identifier)
+          (type
+            (typeref
+              (identifier))))))
+    (block
+      (kBegin)
+      (kEnd))))
+
+==================================================
+Subrange with function calls
+==================================================
+
+type
+  TR = Low(TE)..High(TE);
+
+---
+
+(root
+  (declTypes
+    (kType)
+    (declType
+      (identifier)
+      (kEq)
+      (type
+        (declSubRange
+          (exprCall
+            (identifier)
+            (exprArgs
+              (identifier)))
+          (exprCall
+            (identifier)
+            (exprArgs
+              (identifier))))))))
+
+==================================================
+Assembler operands with strings and hex numbers
+==================================================
+
+function F: Cardinal;
+asm
+  mov    ecx, ('Z'-'A')
+  mov    eax, 2000000h
+end;
+
+---
+
+(root
+  (defProc
+    (declProc
+      (kFunction)
+      (identifier)
+      (typeref
+        (identifier)))
+    (asm
+      (kAsm)
+      (asmBody
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier))
+      (kEnd))))
