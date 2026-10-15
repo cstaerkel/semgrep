@@ -376,11 +376,11 @@ let include_path : string list Lazy_safe.t =
       | Some s ->
           s
           |> String.map (function
-               | '\n'
-               | '\r' ->
-                   ';'
-               | '\\' -> '/'
-               | c -> c)
+            | '\n'
+            | '\r' ->
+                ';'
+            | '\\' -> '/'
+            | c -> c)
           |> String.split_on_char ';' |> List.map String.trim
           |> List.filter (fun d -> d <> ""))
 
@@ -572,7 +572,7 @@ let rec process ~(defs : SSet.t ref) ~(basedir : string) ~(depth : int)
             when !active && depth < max_include_depth && word <> ""
                  && word.[0] <> '+'
                  && word.[0] <> '-'
-                 && word.[0] <> '%' (* {$I %DATE%} etc. *) ->
+                 && word.[0] <> '%' (* {$I %DATE%} etc. *) -> (
               let fname =
                 let a = String.trim arg in
                 let a =
@@ -586,7 +586,7 @@ let rec process ~(defs : SSet.t ref) ~(basedir : string) ~(depth : int)
                     | c -> c)
                   a
               in
-              (match resolve_include ~basedir fname with
+              match resolve_include ~basedir fname with
               | Some p -> (
                   match read_file_opt p with
                   | Some contents ->

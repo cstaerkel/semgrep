@@ -639,65 +639,65 @@ and map_declarg (env : env) (x : CST.declarg) : G.parameter list =
 
 and map_declarg_ (env : env) (extra_attrs : G.attribute list)
     (x :
-      CST.anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07)
+      CST
+      .anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07)
     : G.parameter list =
   match x with
-      | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa
-          (modifier, more, id, typ) ->
-          let attrs =
-            match modifier with
-            | `Kvar t -> [ G.KeywordAttr (G.Var, token env t) ]
-            | `Kout t -> [ G.OtherAttribute (todo_kind env "out" t, []) ]
-            | `Kcon t -> [ G.KeywordAttr (G.Const, token env t) ]
-            | `Kconst_opt_rttias (t, rtti) ->
-                G.KeywordAttr (G.Const, token env t)
-                :: map_rttiattributes env rtti
-          in
-          let attrs = extra_attrs @ attrs in
-          let ptype, pdefault =
-            match typ with
-            | Some (_colon, t, def) ->
-                (Some (map_type env t), Option.map (map_defaultvalue env) def)
-            | None -> (None, None)
-          in
-          let ids =
-            (match more with
-              | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
-              | None -> [])
-            @ [ map_identifier env id ]
-          in
-          List.map
-            (fun id ->
-              G.Param
-                {
-                  G.pname = Some id;
-                  ptype;
-                  pdefault;
-                  pattrs = attrs;
-                  pinfo = id_info ();
-                })
-            ids
-      | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa
-          ((more, id, _colon, t, def) : CST.declvariantfield) ->
-          let ptype = Some (map_type env t) in
-          let pdefault = Option.map (map_defaultvalue env) def in
-          let ids =
-            (match more with
-              | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
-              | None -> [])
-            @ [ map_identifier env id ]
-          in
-          List.map
-            (fun id ->
-              G.Param
-                {
-                  G.pname = Some id;
-                  ptype;
-                  pdefault;
-                  pattrs = extra_attrs;
-                  pinfo = id_info ();
-                })
-            ids
+  | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa
+      (modifier, more, id, typ) ->
+      let attrs =
+        match modifier with
+        | `Kvar t -> [ G.KeywordAttr (G.Var, token env t) ]
+        | `Kout t -> [ G.OtherAttribute (todo_kind env "out" t, []) ]
+        | `Kcon t -> [ G.KeywordAttr (G.Const, token env t) ]
+        | `Kconst_opt_rttias (t, rtti) ->
+            G.KeywordAttr (G.Const, token env t) :: map_rttiattributes env rtti
+      in
+      let attrs = extra_attrs @ attrs in
+      let ptype, pdefault =
+        match typ with
+        | Some (_colon, t, def) ->
+            (Some (map_type env t), Option.map (map_defaultvalue env) def)
+        | None -> (None, None)
+      in
+      let ids =
+        (match more with
+          | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
+          | None -> [])
+        @ [ map_identifier env id ]
+      in
+      List.map
+        (fun id ->
+          G.Param
+            {
+              G.pname = Some id;
+              ptype;
+              pdefault;
+              pattrs = attrs;
+              pinfo = id_info ();
+            })
+        ids
+  | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa
+      ((more, id, _colon, t, def) : CST.declvariantfield) ->
+      let ptype = Some (map_type env t) in
+      let pdefault = Option.map (map_defaultvalue env) def in
+      let ids =
+        (match more with
+          | Some xs -> List.map (fun (i, _) -> map_identifier env i) xs
+          | None -> [])
+        @ [ map_identifier env id ]
+      in
+      List.map
+        (fun id ->
+          G.Param
+            {
+              G.pname = Some id;
+              ptype;
+              pdefault;
+              pattrs = extra_attrs;
+              pinfo = id_info ();
+            })
+        ids
 
 (*****************************************************************************)
 (* Types (full) *)
@@ -829,9 +829,7 @@ and map_vardef (env : env) ((tvar, id, _colon, t) : CST.vardef) : G.stmt =
 and map_vardefmulti (env : env) ((tvar, x) : CST.vardefmulti) : G.stmt =
   match x with
   | `Id_rep1_COMMA_id_COLON_type (id, more, _colon, t) ->
-      map_inline_vars env tvar
-        (id :: List.map snd more)
-        (map_type env t)
+      map_inline_vars env tvar (id :: List.map snd more) (map_type env t)
   | `Id_COLON_choice_decl (id, _colon, t) ->
       map_inline_vars env tvar [ id ] (map_type env (t :> CST.type_))
 
@@ -1936,7 +1934,9 @@ let line_col_to_pos_of_string (src : string) : int * int -> int =
       if pos > len + 1 then raise Not_found else pos
 
 let parse (file : Fpath.t) =
-  let src = Lazy_safe.from_fun (fun () -> Pascal_preprocessor.preprocess_file file) in
+  let src =
+    Lazy_safe.from_fun (fun () -> Pascal_preprocessor.preprocess_file file)
+  in
   H.wrap_parser
     (fun () ->
       Tree_sitter_pascal.Parse.string ~src_file:!!file (Lazy_safe.force src))
