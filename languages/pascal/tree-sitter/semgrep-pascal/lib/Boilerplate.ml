@@ -22,215 +22,56 @@ let blank (env : env) () =
 let map_tok_prec_p5_pat_9f5699f (env : env) (tok : CST.tok_prec_p5_pat_9f5699f) =
   (* tok_prec_p5_pat_9f5699f *) token env tok
 
-let map_ktrue (env : env) (tok : CST.ktrue) =
-  (* pattern true *) token env tok
-
-let map_kobjcprotocol (env : env) (tok : CST.kobjcprotocol) =
-  (* pattern objcprotocol *) token env tok
-
-let map_kbegin (env : env) (tok : CST.kbegin) =
-  (* pattern begin *) token env tok
-
-let map_kfalse (env : env) (tok : CST.kfalse) =
-  (* pattern false *) token env tok
-
-let map_klabel (env : env) (tok : CST.klabel) =
-  (* pattern label *) token env tok
-
-let map_kset (env : env) (tok : CST.kset) =
-  (* pattern set *) token env tok
-
-let map_kinterface (env : env) (tok : CST.kinterface) =
-  (* pattern interface *) token env tok
+let map_ktry (env : env) (tok : CST.ktry) =
+  (* pattern try *) token env tok
 
 let map_kobject (env : env) (tok : CST.kobject) =
   (* pattern object *) token env tok
 
-let map_kcdecl (env : env) (tok : CST.kcdecl) =
-  (* pattern cdecl *) token env tok
-
-let map_kuses (env : env) (tok : CST.kuses) =
-  (* pattern uses *) token env tok
-
-let map_imm_tok_pat_f57674d (env : env) (tok : CST.imm_tok_pat_f57674d) =
-  (* pattern %[01]+ *) token env tok
-
-let map_kdeprecated (env : env) (tok : CST.kdeprecated) =
-  (* pattern deprecated *) token env tok
-
-let map_kinline (env : env) (tok : CST.kinline) =
-  (* pattern inline *) token env tok
-
-let map_kunimplemented (env : env) (tok : CST.kunimplemented) =
-  (* pattern unimplemented *) token env tok
-
-let map_kvar (env : env) (tok : CST.kvar) =
-  (* pattern var *) token env tok
-
-let map_kinitialization (env : env) (tok : CST.kinitialization) =
-  (* pattern initialization *) token env tok
-
-let map_kiocheck (env : env) (tok : CST.kiocheck) =
-  (* pattern iocheck *) token env tok
-
-let map_kprocedure (env : env) (tok : CST.kprocedure) =
-  (* pattern procedure *) token env tok
-
-let map_koperator (env : env) (tok : CST.koperator) =
-  (* pattern operator *) token env tok
-
-let map_kgeneric (env : env) (tok : CST.kgeneric) =
-  (* pattern generic *) token env tok
-
-let map_ppendif (env : env) (tok : CST.ppendif) =
-  (* ppendif *) token env tok
-
-let map_kthreadvar (env : env) (tok : CST.kthreadvar) =
-  (* pattern threadvar *) token env tok
-
-let map_kconstructor (env : env) (tok : CST.kconstructor) =
-  (* pattern constructor *) token env tok
-
-let map_kexternal (env : env) (tok : CST.kexternal) =
-  (* pattern external *) token env tok
-
-let map_pat_cdd9bad (env : env) (tok : CST.pat_cdd9bad) =
-  (* pattern "'[^']*'" *) token env tok
-
-let map_ksaveregisters (env : env) (tok : CST.ksaveregisters) =
-  (* pattern saveregisters *) token env tok
-
-let map_kpacked (env : env) (tok : CST.kpacked) =
-  (* pattern packed *) token env tok
-
-let map_pat_cafba40 (env : env) (tok : CST.pat_cafba40) =
-  (* pattern [0-9a-fA-F] *) token env tok
-
-let map_kinherited (env : env) (tok : CST.kinherited) =
-  (* pattern inherited *) token env tok
-
-let map_kshr (env : env) (tok : CST.kshr) =
-  (* pattern shr *) token env tok
-
-let map_kdownto (env : env) (tok : CST.kdownto) =
-  (* pattern downto *) token env tok
-
-let map_kraiseat (env : env) (tok : CST.kraiseat) =
-  (* kraiseat *) token env tok
-
-let map_krequired (env : env) (tok : CST.krequired) =
-  (* pattern required *) token env tok
-
-let map_kif (env : env) (tok : CST.kif) =
-  (* pattern if *) token env tok
-
-let map_kwith (env : env) (tok : CST.kwith) =
-  (* pattern with *) token env tok
-
-let map_kconst (env : env) (tok : CST.kconst) =
-  (* pattern const *) token env tok
-
-let map_kexports (env : env) (tok : CST.kexports) =
-  (* pattern exports *) token env tok
-
-let map_knoreturn (env : env) (tok : CST.knoreturn) =
-  (* pattern noreturn *) token env tok
-
-let map_kmwpascal (env : env) (tok : CST.kmwpascal) =
-  (* pattern mwpascal *) token env tok
-
-let map_kpackage (env : env) (tok : CST.kpackage) =
-  (* pattern package *) token env tok
+let map_kcase (env : env) (tok : CST.kcase) =
+  (* pattern case *) token env tok
 
 let map_kfar (env : env) (tok : CST.kfar) =
   (* pattern far *) token env tok
 
-let map_kobjcclass (env : env) (tok : CST.kobjcclass) =
-  (* pattern objcclass *) token env tok
-
-let map_kexport (env : env) (tok : CST.kexport) =
-  (* pattern export *) token env tok
-
-let map_tok_prec_p5_pat_ef0cc7f (env : env) (tok : CST.tok_prec_p5_pat_ef0cc7f) =
-  (* tok_prec_p5_pat_ef0cc7f *) token env tok
-
-let map_kdynamic (env : env) (tok : CST.kdynamic) =
-  (* pattern dynamic *) token env tok
-
-let map_krepeat (env : env) (tok : CST.krepeat) =
-  (* pattern repeat *) token env tok
-
-let map_koptional (env : env) (tok : CST.koptional) =
-  (* pattern optional *) token env tok
-
 let map_klibrary (env : env) (tok : CST.klibrary) =
   (* pattern library *) token env tok
-
-let map_kvarargs (env : env) (tok : CST.kvarargs) =
-  (* pattern varargs *) token env tok
 
 let map_kshl (env : env) (tok : CST.kshl) =
   (* pattern shl *) token env tok
 
-let map_kabstract (env : env) (tok : CST.kabstract) =
-  (* pattern abstract *) token env tok
-
-let map_kexperimental (env : env) (tok : CST.kexperimental) =
-  (* pattern experimental *) token env tok
+let map_kinterrupt (env : env) (tok : CST.kinterrupt) =
+  (* pattern interrupt *) token env tok
 
 let map_kof (env : env) (tok : CST.kof) =
   (* pattern of *) token env tok
 
-let map_kwriteonly (env : env) (tok : CST.kwriteonly) =
-  (* pattern writeonly *) token env tok
+let map_kbegin (env : env) (tok : CST.kbegin) =
+  (* pattern begin *) token env tok
 
-let map_kcontains (env : env) (tok : CST.kcontains) =
-  (* pattern contains *) token env tok
+let map_kclass (env : env) (tok : CST.kclass) =
+  (* pattern class *) token env tok
 
-let map_kreference (env : env) (tok : CST.kreference) =
-  (* pattern reference *) token env tok
+let map_kvar (env : env) (tok : CST.kvar) =
+  (* pattern var *) token env tok
 
-let map_pat_3ea53fb (env : env) (tok : CST.pat_3ea53fb) =
-  (* pattern [.,:;+\-*\[\]<>&%$@] *) token env tok
-
-let map_knil (env : env) (tok : CST.knil) =
-  (* pattern nil *) token env tok
-
-let map_kto (env : env) (tok : CST.kto) =
-  (* pattern to *) token env tok
-
-let map_tok_prec_p5_pat_0a9b8cd (env : env) (tok : CST.tok_prec_p5_pat_0a9b8cd) =
-  (* tok_prec_p5_pat_0a9b8cd *) token env tok
-
-let map_kfinally (env : env) (tok : CST.kfinally) =
-  (* pattern finally *) token env tok
-
-let map_kindex (env : env) (tok : CST.kindex) =
-  (* pattern index *) token env tok
-
-let map_kimplements (env : env) (tok : CST.kimplements) =
-  (* pattern implements *) token env tok
-
-let map_kinterrupt (env : env) (tok : CST.kinterrupt) =
-  (* pattern interrupt *) token env tok
-
-let map_pat_588cb21 (env : env) (tok : CST.pat_588cb21) =
-  (* pattern [-+]?[0-9]*\.?[0-9]+([eE][+-]?[0-9]+)? *) token env tok
-
-let map_kor (env : env) (tok : CST.kor) =
-  (* pattern or *) token env tok
+let map_pat_cdd9bad (env : env) (tok : CST.pat_cdd9bad) =
+  (* pattern "'[^']*'" *) token env tok
 
 let map_kdestructor (env : env) (tok : CST.kdestructor) =
   (* pattern destructor *) token env tok
 
-let map_ppelse (env : env) (tok : CST.ppelse) =
-  (* ppelse *) token env tok
+let map_kinterface (env : env) (tok : CST.kinterface) =
+  (* pattern interface *) token env tok
 
 let map_kunit (env : env) (tok : CST.kunit) =
   (* pattern unit *) token env tok
 
-let map_kcase (env : env) (tok : CST.kcase) =
-  (* pattern case *) token env tok
+let map_kvarargs (env : env) (tok : CST.kvarargs) =
+  (* pattern varargs *) token env tok
+
+let map_kinline (env : env) (tok : CST.kinline) =
+  (* pattern inline *) token env tok
 
 let map_kis (env : env) (tok : CST.kis) =
   (* pattern is *) token env tok
@@ -238,236 +79,155 @@ let map_kis (env : env) (tok : CST.kis) =
 let map_kprogram (env : env) (tok : CST.kprogram) =
   (* pattern program *) token env tok
 
-let map_kvirtual (env : env) (tok : CST.kvirtual) =
-  (* pattern virtual *) token env tok
+let map_kfile (env : env) (tok : CST.kfile) =
+  (* pattern file *) token env tok
 
-let map_knostackframe (env : env) (tok : CST.knostackframe) =
-  (* pattern nostackframe *) token env tok
-
-let map_kplatform (env : env) (tok : CST.kplatform) =
-  (* pattern platform *) token env tok
+let map_koptional (env : env) (tok : CST.koptional) =
+  (* pattern optional *) token env tok
 
 let map_kgoto (env : env) (tok : CST.kgoto) =
   (* pattern goto *) token env tok
 
-let map_kstdcall (env : env) (tok : CST.kstdcall) =
-  (* pattern stdcall *) token env tok
+let map_ppelse (env : env) (tok : CST.ppelse) =
+  (* ppelse *) token env tok
 
-let map_karray (env : env) (tok : CST.karray) =
-  (* pattern array *) token env tok
+let map_kto (env : env) (tok : CST.kto) =
+  (* pattern to *) token env tok
 
-let map_kdo (env : env) (tok : CST.kdo) =
-  (* pattern do *) token env tok
+let map_kcontains (env : env) (tok : CST.kcontains) =
+  (* pattern contains *) token env tok
 
-let map_kconstref (env : env) (tok : CST.kconstref) =
-  (* pattern constref *) token env tok
+let map_kfalse (env : env) (tok : CST.kfalse) =
+  (* pattern false *) token env tok
 
-let map_kon (env : env) (tok : CST.kon) =
-  (* pattern on *) token env tok
-
-let map_klocal (env : env) (tok : CST.klocal) =
-  (* pattern local *) token env tok
-
-let map_kwhile (env : env) (tok : CST.kwhile) =
-  (* pattern while *) token env tok
-
-let map_kdefault (env : env) (tok : CST.kdefault) =
-  (* pattern default *) token env tok
-
-let map_kpublished (env : env) (tok : CST.kpublished) =
-  (* pattern published *) token env tok
-
-let map_kcvar (env : env) (tok : CST.kcvar) =
-  (* pattern cvar *) token env tok
+let map_pat_8c6847e (env : env) (tok : CST.pat_8c6847e) =
+  (* pattern "'[^'\\r\\n]*'" *) token env tok
 
 let map_ksealed (env : env) (tok : CST.ksealed) =
   (* pattern sealed *) token env tok
 
-let map_kuntil (env : env) (tok : CST.kuntil) =
-  (* pattern until *) token env tok
-
-let map_krequires (env : env) (tok : CST.krequires) =
-  (* pattern requires *) token env tok
-
-let map_kwrite (env : env) (tok : CST.kwrite) =
-  (* pattern write *) token env tok
-
-let map_ppfragmentstmt (env : env) (tok : CST.ppfragmentstmt) =
-  (* ppfragmentstmt *) token env tok
-
-let map_krecord (env : env) (tok : CST.krecord) =
-  (* pattern record *) token env tok
+let map_knil (env : env) (tok : CST.knil) =
+  (* pattern nil *) token env tok
 
 let map_kpascal (env : env) (tok : CST.kpascal) =
   (* pattern pascal *) token env tok
 
-let map_kprivate (env : env) (tok : CST.kprivate) =
-  (* pattern private *) token env tok
+let map_pat_770128e (env : env) (tok : CST.pat_770128e) =
+  (* pattern "\"[^\"\\r\\n]*\"" *) token env tok
 
-let map_kms_abi_default (env : env) (tok : CST.kms_abi_default) =
-  (* pattern ms_abi_default *) token env tok
-
-let map_kout (env : env) (tok : CST.kout) =
-  (* pattern out *) token env tok
-
-let map_identifier (env : env) (tok : CST.identifier) =
-  (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env tok
-
-let map_kreadonly (env : env) (tok : CST.kreadonly) =
-  (* pattern readonly *) token env tok
-
-let map_kraise (env : env) (tok : CST.kraise) =
-  (* pattern raise *) token env tok
-
-let map_kregister (env : env) (tok : CST.kregister) =
-  (* pattern register *) token env tok
-
-let map_kwinapi (env : env) (tok : CST.kwinapi) =
-  (* pattern winapi *) token env tok
-
-let map_kalias (env : env) (tok : CST.kalias) =
-  (* pattern alias *) token env tok
-
-let map_kdelayed (env : env) (tok : CST.kdelayed) =
-  (* pattern delayed *) token env tok
-
-let map_kreintroduce (env : env) (tok : CST.kreintroduce) =
-  (* pattern reintroduce *) token env tok
-
-let map_kforward (env : env) (tok : CST.kforward) =
-  (* pattern forward *) token env tok
-
-let map_kmessage (env : env) (tok : CST.kmessage) =
-  (* pattern message *) token env tok
-
-let map_koverload (env : env) (tok : CST.koverload) =
-  (* pattern overload *) token env tok
-
-let map_kcppdecl (env : env) (tok : CST.kcppdecl) =
-  (* pattern cppdecl *) token env tok
-
-let map_kfinalization (env : env) (tok : CST.kfinalization) =
-  (* pattern finalization *) token env tok
-
-let map_kspecialize (env : env) (tok : CST.kspecialize) =
-  (* pattern specialize *) token env tok
-
-let map_ktry (env : env) (tok : CST.ktry) =
-  (* pattern try *) token env tok
-
-let map_kstatic (env : env) (tok : CST.kstatic) =
-  (* pattern static *) token env tok
-
-let map_ksysv_abi_default (env : env) (tok : CST.ksysv_abi_default) =
-  (* pattern sysv_abi_default *) token env tok
-
-let map_kexcept (env : env) (tok : CST.kexcept) =
-  (* pattern except *) token env tok
-
-let map_knodefault (env : env) (tok : CST.knodefault) =
-  (* pattern nodefault *) token env tok
-
-let map_tok_prec_p5_pat_b66c674 (env : env) (tok : CST.tok_prec_p5_pat_b66c674) =
-  (* tok_prec_p5_pat_b66c674 *) token env tok
+let map_kinitialization (env : env) (tok : CST.kinitialization) =
+  (* pattern initialization *) token env tok
 
 let map_ksoftfloat (env : env) (tok : CST.ksoftfloat) =
   (* pattern softfloat *) token env tok
 
-let map_kobjccategory (env : env) (tok : CST.kobjccategory) =
-  (* pattern objccategory *) token env tok
+let map_kdynamic (env : env) (tok : CST.kdynamic) =
+  (* pattern dynamic *) token env tok
 
-let map_koverride (env : env) (tok : CST.koverride) =
-  (* pattern override *) token env tok
+let map_kread (env : env) (tok : CST.kread) =
+  (* pattern read *) token env tok
 
-let map_kproperty (env : env) (tok : CST.kproperty) =
-  (* pattern property *) token env tok
-
-let map_kelse (env : env) (tok : CST.kelse) =
-  (* pattern else *) token env tok
-
-let map_kstored (env : env) (tok : CST.kstored) =
-  (* pattern stored *) token env tok
-
-let map_pat_6c79139 (env : env) (tok : CST.pat_6c79139) =
-  (* pattern "'''[ \\t]*\\r?\\n([^']|'[^']|''[^'])*'''" *) token env tok
-
-let map_ppfragmentexpr (env : env) (tok : CST.ppfragmentexpr) =
-  (* ppfragmentexpr *) token env tok
-
-let map_imm_tok_pat_d238afd (env : env) (tok : CST.imm_tok_pat_d238afd) =
-  (* pattern \$[a-fA-F0-9]+ *) token env tok
-
-let map_kclass (env : env) (tok : CST.kclass) =
-  (* pattern class *) token env tok
-
-let map_kprotected (env : env) (tok : CST.kprotected) =
-  (* pattern protected *) token env tok
-
-let map_tok_prec_p5_pat_af36d87 (env : env) (tok : CST.tok_prec_p5_pat_af36d87) =
-  (* tok_prec_p5_pat_af36d87 *) token env tok
-
-let map_kdispinterface (env : env) (tok : CST.kdispinterface) =
-  (* pattern dispinterface *) token env tok
-
-let map_kvectorcall (env : env) (tok : CST.kvectorcall) =
-  (* pattern vectorcall *) token env tok
-
-let map_pat_f7c0026 (env : env) (tok : CST.pat_f7c0026) =
-  (* pattern \([^*]|\) *) token env tok
-
-let map_knear (env : env) (tok : CST.knear) =
-  (* pattern near *) token env tok
-
-let map_ktype (env : env) (tok : CST.ktype) =
-  (* pattern type *) token env tok
+let map_krequires (env : env) (tok : CST.krequires) =
+  (* pattern requires *) token env tok
 
 let map_kimplementation (env : env) (tok : CST.kimplementation) =
   (* pattern implementation *) token env tok
 
-let map_kresourcestring (env : env) (tok : CST.kresourcestring) =
-  (* pattern resourcestring *) token env tok
+let map_kwrite (env : env) (tok : CST.kwrite) =
+  (* pattern write *) token env tok
 
-let map_ksafecall (env : env) (tok : CST.ksafecall) =
-  (* pattern safecall *) token env tok
+let map_kconstref (env : env) (tok : CST.kconstref) =
+  (* pattern constref *) token env tok
 
-let map_kend (env : env) (tok : CST.kend) =
-  (* pattern end *) token env tok
+let map_kexternal (env : env) (tok : CST.kexternal) =
+  (* pattern external *) token env tok
 
-let map_kin (env : env) (tok : CST.kin) =
-  (* pattern in *) token env tok
-
-let map_kmod (env : env) (tok : CST.kmod) =
-  (* pattern mod *) token env tok
-
-let map_kdispid (env : env) (tok : CST.kdispid) =
-  (* pattern dispid *) token env tok
-
-let map_khardfloat (env : env) (tok : CST.khardfloat) =
-  (* pattern hardfloat *) token env tok
+let map_knostackframe (env : env) (tok : CST.knostackframe) =
+  (* pattern nostackframe *) token env tok
 
 let map_kname (env : env) (tok : CST.kname) =
   (* pattern name *) token env tok
 
-let map_kstring (env : env) (tok : CST.kstring) =
-  (* pattern string *) token env tok
+let map_kpacked (env : env) (tok : CST.kpacked) =
+  (* pattern packed *) token env tok
 
-let map_kas (env : env) (tok : CST.kas) =
-  (* pattern as *) token env tok
+let map_kobjcprotocol (env : env) (tok : CST.kobjcprotocol) =
+  (* pattern objcprotocol *) token env tok
+
+let map_kexports (env : env) (tok : CST.kexports) =
+  (* pattern exports *) token env tok
+
+let map_tok_prec_p5_pat_ef0cc7f (env : env) (tok : CST.tok_prec_p5_pat_ef0cc7f) =
+  (* tok_prec_p5_pat_ef0cc7f *) token env tok
+
+let map_kelse (env : env) (tok : CST.kelse) =
+  (* pattern else *) token env tok
+
+let map_krequired (env : env) (tok : CST.krequired) =
+  (* pattern required *) token env tok
+
+let map_kor (env : env) (tok : CST.kor) =
+  (* pattern or *) token env tok
 
 let map_khelper (env : env) (tok : CST.khelper) =
   (* pattern helper *) token env tok
 
-let map_kpublic (env : env) (tok : CST.kpublic) =
-  (* pattern public *) token env tok
+let map_klocal (env : env) (tok : CST.klocal) =
+  (* pattern local *) token env tok
+
+let map_kvectorcall (env : env) (tok : CST.kvectorcall) =
+  (* pattern vectorcall *) token env tok
+
+let map_kshr (env : env) (tok : CST.kshr) =
+  (* pattern shr *) token env tok
+
+let map_kexport (env : env) (tok : CST.kexport) =
+  (* pattern export *) token env tok
+
+let map_kon (env : env) (tok : CST.kon) =
+  (* pattern on *) token env tok
 
 let map_kxor (env : env) (tok : CST.kxor) =
   (* pattern xor *) token env tok
 
-let map_kms_abi_cdecl (env : env) (tok : CST.kms_abi_cdecl) =
-  (* pattern ms_abi_cdecl *) token env tok
+let map_kcppdecl (env : env) (tok : CST.kcppdecl) =
+  (* pattern cppdecl *) token env tok
 
-let map_kasm (env : env) (tok : CST.kasm) =
-  (* pattern asm *) token env tok
+let map_kdownto (env : env) (tok : CST.kdownto) =
+  (* pattern downto *) token env tok
+
+let map_kregister (env : env) (tok : CST.kregister) =
+  (* pattern register *) token env tok
+
+let map_pat_588cb21 (env : env) (tok : CST.pat_588cb21) =
+  (* pattern [-+]?[0-9]*\.?[0-9]+([eE][+-]?[0-9]+)? *) token env tok
+
+let map_knodefault (env : env) (tok : CST.knodefault) =
+  (* pattern nodefault *) token env tok
+
+let map_ktrue (env : env) (tok : CST.ktrue) =
+  (* pattern true *) token env tok
+
+let map_tok_prec_p5_pat_0a9b8cd (env : env) (tok : CST.tok_prec_p5_pat_0a9b8cd) =
+  (* tok_prec_p5_pat_0a9b8cd *) token env tok
+
+let map_kfor (env : env) (tok : CST.kfor) =
+  (* pattern for *) token env tok
+
+let map_kinherited (env : env) (tok : CST.kinherited) =
+  (* pattern inherited *) token env tok
+
+let map_identifier (env : env) (tok : CST.identifier) =
+  (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env tok
+
+let map_kin (env : env) (tok : CST.kin) =
+  (* pattern in *) token env tok
+
+let map_kiocheck (env : env) (tok : CST.kiocheck) =
+  (* pattern iocheck *) token env tok
+
+let map_pat_6a71975 (env : env) (tok : CST.pat_6a71975) =
+  (* pattern [.,:;+\-*\/\[\]<>&%$@=^!#~|?] *) token env tok
 
 let map_ppif (env : env) (tok : CST.ppif) =
   (* ppif *) token env tok
@@ -475,47 +235,293 @@ let map_ppif (env : env) (tok : CST.ppif) =
 let map_kotherwise (env : env) (tok : CST.kotherwise) =
   (* pattern otherwise *) token env tok
 
-let map_kread (env : env) (tok : CST.kread) =
-  (* pattern read *) token env tok
+let map_kdispid (env : env) (tok : CST.kdispid) =
+  (* pattern dispid *) token env tok
 
 let map_ksysv_abi_cdecl (env : env) (tok : CST.ksysv_abi_cdecl) =
   (* pattern sysv_abi_cdecl *) token env tok
 
-let map_kand (env : env) (tok : CST.kand) =
-  (* pattern and *) token env tok
+let map_kuntil (env : env) (tok : CST.kuntil) =
+  (* pattern until *) token env tok
 
-let map_kdiv (env : env) (tok : CST.kdiv) =
-  (* pattern div *) token env tok
+let map_kcdecl (env : env) (tok : CST.kcdecl) =
+  (* pattern cdecl *) token env tok
 
-let map_kfile (env : env) (tok : CST.kfile) =
-  (* pattern file *) token env tok
+let map_klabel (env : env) (tok : CST.klabel) =
+  (* pattern label *) token env tok
 
-let map_kfunction (env : env) (tok : CST.kfunction) =
-  (* pattern function *) token env tok
+let map_kproperty (env : env) (tok : CST.kproperty) =
+  (* pattern property *) token env tok
 
-let map_kabsolute (env : env) (tok : CST.kabsolute) =
-  (* pattern absolute *) token env tok
-
-let map_kstrict (env : env) (tok : CST.kstrict) =
-  (* pattern strict *) token env tok
-
-let map_tok_prec_p5_pat_6f93d17 (env : env) (tok : CST.tok_prec_p5_pat_6f93d17) =
-  (* tok_prec_p5_pat_6f93d17 *) token env tok
-
-let map_imm_tok_pat_ec19546 (env : env) (tok : CST.imm_tok_pat_ec19546) =
-  (* pattern [-+]?[0-9]+ *) token env tok
+let map_kwhile (env : env) (tok : CST.kwhile) =
+  (* pattern while *) token env tok
 
 let map_knot (env : env) (tok : CST.knot) =
   (* pattern not *) token env tok
 
+let map_kprivate (env : env) (tok : CST.kprivate) =
+  (* pattern private *) token env tok
+
+let map_kstored (env : env) (tok : CST.kstored) =
+  (* pattern stored *) token env tok
+
+let map_kas (env : env) (tok : CST.kas) =
+  (* pattern as *) token env tok
+
+let map_kconstructor (env : env) (tok : CST.kconstructor) =
+  (* pattern constructor *) token env tok
+
+let map_kmwpascal (env : env) (tok : CST.kmwpascal) =
+  (* pattern mwpascal *) token env tok
+
+let map_koperator (env : env) (tok : CST.koperator) =
+  (* pattern operator *) token env tok
+
+let map_kwinapi (env : env) (tok : CST.kwinapi) =
+  (* pattern winapi *) token env tok
+
+let map_kdelayed (env : env) (tok : CST.kdelayed) =
+  (* pattern delayed *) token env tok
+
+let map_kraise (env : env) (tok : CST.kraise) =
+  (* pattern raise *) token env tok
+
+let map_kdefault (env : env) (tok : CST.kdefault) =
+  (* pattern default *) token env tok
+
+let map_kset (env : env) (tok : CST.kset) =
+  (* pattern set *) token env tok
+
+let map_kuses (env : env) (tok : CST.kuses) =
+  (* pattern uses *) token env tok
+
+let map_kresourcestring (env : env) (tok : CST.kresourcestring) =
+  (* pattern resourcestring *) token env tok
+
+let map_kwriteonly (env : env) (tok : CST.kwriteonly) =
+  (* kwriteonly *) token env tok
+
+let map_ppfragmentexpr (env : env) (tok : CST.ppfragmentexpr) =
+  (* ppfragmentexpr *) token env tok
+
+let map_kreference (env : env) (tok : CST.kreference) =
+  (* pattern reference *) token env tok
+
+let map_kplatform (env : env) (tok : CST.kplatform) =
+  (* pattern platform *) token env tok
+
+let map_kprocedure (env : env) (tok : CST.kprocedure) =
+  (* pattern procedure *) token env tok
+
+let map_koverload (env : env) (tok : CST.koverload) =
+  (* pattern overload *) token env tok
+
+let map_imm_tok_pat_d238afd (env : env) (tok : CST.imm_tok_pat_d238afd) =
+  (* pattern \$[a-fA-F0-9]+ *) token env tok
+
+let map_krecord (env : env) (tok : CST.krecord) =
+  (* pattern record *) token env tok
+
+let map_kraiseat (env : env) (tok : CST.kraiseat) =
+  (* kraiseat *) token env tok
+
+let map_kreintroduce (env : env) (tok : CST.kreintroduce) =
+  (* pattern reintroduce *) token env tok
+
+let map_kwith (env : env) (tok : CST.kwith) =
+  (* pattern with *) token env tok
+
+let map_kand (env : env) (tok : CST.kand) =
+  (* pattern and *) token env tok
+
+let map_kdeprecated (env : env) (tok : CST.kdeprecated) =
+  (* pattern deprecated *) token env tok
+
+let map_krepeat (env : env) (tok : CST.krepeat) =
+  (* pattern repeat *) token env tok
+
+let map_pat_238b233 (env : env) (tok : CST.pat_238b233) =
+  (* pattern [0-9][0-9a-fA-F]*[hH]? *) token env tok
+
+let map_kfunction (env : env) (tok : CST.kfunction) =
+  (* pattern function *) token env tok
+
+let map_kmod (env : env) (tok : CST.kmod) =
+  (* pattern mod *) token env tok
+
+let map_koverride (env : env) (tok : CST.koverride) =
+  (* pattern override *) token env tok
+
+let map_kcvar (env : env) (tok : CST.kcvar) =
+  (* pattern cvar *) token env tok
+
+let map_kfinally (env : env) (tok : CST.kfinally) =
+  (* pattern finally *) token env tok
+
+let map_kstatic (env : env) (tok : CST.kstatic) =
+  (* pattern static *) token env tok
+
+let map_ktype (env : env) (tok : CST.ktype) =
+  (* pattern type *) token env tok
+
+let map_kstdcall (env : env) (tok : CST.kstdcall) =
+  (* pattern stdcall *) token env tok
+
+let map_kabsolute (env : env) (tok : CST.kabsolute) =
+  (* pattern absolute *) token env tok
+
+let map_kexcept (env : env) (tok : CST.kexcept) =
+  (* pattern except *) token env tok
+
+let map_kmessage (env : env) (tok : CST.kmessage) =
+  (* pattern message *) token env tok
+
 let map_kthen (env : env) (tok : CST.kthen) =
   (* pattern then *) token env tok
+
+let map_kexperimental (env : env) (tok : CST.kexperimental) =
+  (* pattern experimental *) token env tok
+
+let map_knoreturn (env : env) (tok : CST.knoreturn) =
+  (* pattern noreturn *) token env tok
+
+let map_tok_prec_p5_pat_b66c674 (env : env) (tok : CST.tok_prec_p5_pat_b66c674) =
+  (* tok_prec_p5_pat_b66c674 *) token env tok
+
+let map_kspecialize (env : env) (tok : CST.kspecialize) =
+  (* pattern specialize *) token env tok
+
+let map_kobjcclass (env : env) (tok : CST.kobjcclass) =
+  (* pattern objcclass *) token env tok
+
+let map_kpackage (env : env) (tok : CST.kpackage) =
+  (* pattern package *) token env tok
+
+let map_kprotected (env : env) (tok : CST.kprotected) =
+  (* pattern protected *) token env tok
+
+let map_kend (env : env) (tok : CST.kend) =
+  (* pattern end *) token env tok
+
+let map_kstrict (env : env) (tok : CST.kstrict) =
+  (* pattern strict *) token env tok
+
+let map_pat_6c79139 (env : env) (tok : CST.pat_6c79139) =
+  (* pattern "'''[ \\t]*\\r?\\n([^']|'[^']|''[^'])*'''" *) token env tok
+
+let map_ppendif (env : env) (tok : CST.ppendif) =
+  (* ppendif *) token env tok
+
+let map_imm_tok_pat_ec19546 (env : env) (tok : CST.imm_tok_pat_ec19546) =
+  (* pattern [-+]?[0-9]+ *) token env tok
+
+let map_kconst (env : env) (tok : CST.kconst) =
+  (* pattern const *) token env tok
+
+let map_kpublic (env : env) (tok : CST.kpublic) =
+  (* pattern public *) token env tok
+
+let map_tok_prec_p5_pat_af36d87 (env : env) (tok : CST.tok_prec_p5_pat_af36d87) =
+  (* tok_prec_p5_pat_af36d87 *) token env tok
+
+let map_kdiv (env : env) (tok : CST.kdiv) =
+  (* pattern div *) token env tok
+
+let map_kvirtual (env : env) (tok : CST.kvirtual) =
+  (* pattern virtual *) token env tok
+
+let map_pat_cafba40 (env : env) (tok : CST.pat_cafba40) =
+  (* pattern [0-9a-fA-F] *) token env tok
+
+let map_kunimplemented (env : env) (tok : CST.kunimplemented) =
+  (* pattern unimplemented *) token env tok
+
+let map_kimplements (env : env) (tok : CST.kimplements) =
+  (* pattern implements *) token env tok
+
+let map_ksafecall (env : env) (tok : CST.ksafecall) =
+  (* pattern safecall *) token env tok
+
+let map_ksaveregisters (env : env) (tok : CST.ksaveregisters) =
+  (* pattern saveregisters *) token env tok
+
+let map_kindex (env : env) (tok : CST.kindex) =
+  (* pattern index *) token env tok
+
+let map_kms_abi_cdecl (env : env) (tok : CST.kms_abi_cdecl) =
+  (* pattern ms_abi_cdecl *) token env tok
+
+let map_kalias (env : env) (tok : CST.kalias) =
+  (* pattern alias *) token env tok
+
+let map_kdispinterface (env : env) (tok : CST.kdispinterface) =
+  (* pattern dispinterface *) token env tok
+
+let map_knear (env : env) (tok : CST.knear) =
+  (* pattern near *) token env tok
+
+let map_kasm (env : env) (tok : CST.kasm) =
+  (* pattern asm *) token env tok
+
+let map_kif (env : env) (tok : CST.kif) =
+  (* pattern if *) token env tok
+
+let map_kpublished (env : env) (tok : CST.kpublished) =
+  (* pattern published *) token env tok
+
+let map_khardfloat (env : env) (tok : CST.khardfloat) =
+  (* pattern hardfloat *) token env tok
+
+let map_kms_abi_default (env : env) (tok : CST.kms_abi_default) =
+  (* pattern ms_abi_default *) token env tok
 
 let map_kassembler (env : env) (tok : CST.kassembler) =
   (* pattern assembler *) token env tok
 
-let map_kfor (env : env) (tok : CST.kfor) =
-  (* pattern for *) token env tok
+let map_ppfragmentstmt (env : env) (tok : CST.ppfragmentstmt) =
+  (* ppfragmentstmt *) token env tok
+
+let map_kout (env : env) (tok : CST.kout) =
+  (* pattern out *) token env tok
+
+let map_kreadonly (env : env) (tok : CST.kreadonly) =
+  (* kreadonly *) token env tok
+
+let map_ksysv_abi_default (env : env) (tok : CST.ksysv_abi_default) =
+  (* pattern sysv_abi_default *) token env tok
+
+let map_karray (env : env) (tok : CST.karray) =
+  (* pattern array *) token env tok
+
+let map_kdo (env : env) (tok : CST.kdo) =
+  (* pattern do *) token env tok
+
+let map_kfinalization (env : env) (tok : CST.kfinalization) =
+  (* pattern finalization *) token env tok
+
+let map_kgeneric (env : env) (tok : CST.kgeneric) =
+  (* pattern generic *) token env tok
+
+let map_kabstract (env : env) (tok : CST.kabstract) =
+  (* pattern abstract *) token env tok
+
+let map_kstring (env : env) (tok : CST.kstring) =
+  (* pattern string *) token env tok
+
+let map_tok_prec_p5_pat_6f93d17 (env : env) (tok : CST.tok_prec_p5_pat_6f93d17) =
+  (* tok_prec_p5_pat_6f93d17 *) token env tok
+
+let map_imm_tok_pat_f57674d (env : env) (tok : CST.imm_tok_pat_f57674d) =
+  (* pattern %[01]+ *) token env tok
+
+let map_kobjccategory (env : env) (tok : CST.kobjccategory) =
+  (* pattern objccategory *) token env tok
+
+let map_kthreadvar (env : env) (tok : CST.kthreadvar) =
+  (* pattern threadvar *) token env tok
+
+let map_kforward (env : env) (tok : CST.kforward) =
+  (* pattern forward *) token env tok
 
 let map_anon_choice_kto_86c5a40 (env : env) (x : CST.anon_choice_kto_86c5a40) =
   (match x with
@@ -529,6 +535,31 @@ let map_anon_choice_kto_86c5a40 (env : env) (x : CST.anon_choice_kto_86c5a40) =
 
 let map_literalfloat (env : env) (x : CST.literalfloat) =
   map_pat_588cb21 env x
+
+let map_anon_choice_kelse_d520062 (env : env) (x : CST.anon_choice_kelse_d520062) =
+  (match x with
+  | `Kelse tok -> R.Case ("Kelse",
+      (* pattern else *) token env tok
+    )
+  | `Koth tok -> R.Case ("Koth",
+      (* pattern otherwise *) token env tok
+    )
+  )
+
+let map_exprisnot (env : env) ((v1, v2) : CST.exprisnot) =
+  let v1 = (* pattern is *) token env v1 in
+  let v2 = (* pattern not *) token env v2 in
+  R.Tuple [v1; v2]
+
+let map_anon_choice_kpro_f69e586 (env : env) (x : CST.anon_choice_kpro_f69e586) =
+  (match x with
+  | `Kpro tok -> R.Case ("Kpro",
+      (* pattern procedure *) token env tok
+    )
+  | `Kfun tok -> R.Case ("Kfun",
+      (* pattern function *) token env tok
+    )
+  )
 
 let map_anon_choice_kstd_a801c0a (env : env) (x : CST.anon_choice_kstd_a801c0a) =
   (match x with
@@ -575,26 +606,6 @@ let map_visibility (env : env) (x : CST.visibility) =
     )
   | `Kpri tok -> R.Case ("Kpri",
       (* pattern private *) token env tok
-    )
-  )
-
-let map_anon_choice_kelse_d520062 (env : env) (x : CST.anon_choice_kelse_d520062) =
-  (match x with
-  | `Kelse tok -> R.Case ("Kelse",
-      (* pattern else *) token env tok
-    )
-  | `Koth tok -> R.Case ("Koth",
-      (* pattern otherwise *) token env tok
-    )
-  )
-
-let map_anon_choice_kpro_f69e586 (env : env) (x : CST.anon_choice_kpro_f69e586) =
-  (match x with
-  | `Kpro tok -> R.Case ("Kpro",
-      (* pattern procedure *) token env tok
-    )
-  | `Kfun tok -> R.Case ("Kfun",
-      (* pattern function *) token env tok
     )
   )
 
@@ -678,47 +689,35 @@ let map_operatorname_ (env : env) (x : CST.operatorname_) =
     )
   )
 
-let map_exprisnot (env : env) ((v1, v2) : CST.exprisnot) =
-  let v1 = (* pattern is *) token env v1 in
-  let v2 = (* pattern not *) token env v2 in
-  R.Tuple [v1; v2]
-
 let map_asmbody (env : env) (xs : CST.asmbody) =
   R.List (List.map (fun x ->
     (match x with
     | `Id tok -> R.Case ("Id",
         (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env tok
       )
+    | `Pat_238b233 x -> R.Case ("Pat_238b233",
+        map_pat_238b233 env x
+      )
     | `Pat_cafba40 x -> R.Case ("Pat_cafba40",
         map_pat_cafba40 env x
       )
-    | `Pat_3ea53fb x -> R.Case ("Pat_3ea53fb",
-        map_pat_3ea53fb env x
+    | `Pat_8c6847e x -> R.Case ("Pat_8c6847e",
+        map_pat_8c6847e env x
       )
-    | `Pat_f7c0026 x -> R.Case ("Pat_f7c0026",
-        map_pat_f7c0026 env x
+    | `Pat_770128e x -> R.Case ("Pat_770128e",
+        map_pat_770128e env x
+      )
+    | `Pat_6a71975 x -> R.Case ("Pat_6a71975",
+        map_pat_6a71975 env x
+      )
+    | `LPAR tok -> R.Case ("LPAR",
+        (* "(" *) token env tok
+      )
+    | `RPAR tok -> R.Case ("RPAR",
+        (* ")" *) token env tok
       )
     )
   ) xs)
-
-let map_modulename (env : env) ((v1, v2) : CST.modulename) =
-  let v1 =
-    (match v1 with
-    | Some xs -> R.Option (Some (
-        R.List (List.map (fun (v1, v2) ->
-          let v1 =
-            (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
-          in
-          let v2 = (* "." *) token env v2 in
-          R.Tuple [v1; v2]
-        ) xs)
-      ))
-    | None -> R.Option None)
-  in
-  let v2 =
-    (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v2
-  in
-  R.Tuple [v1; v2]
 
 let map_anon_opt_rep1_decl_COMMA_64c033f (env : env) (opt : CST.anon_opt_rep1_decl_COMMA_64c033f) =
   (match opt with
@@ -747,6 +746,25 @@ let rec map_propaccessor (env : env) (x : CST.propaccessor) =
       R.Tuple [v1; v2; v3]
     )
   )
+
+let map_modulename (env : env) ((v1, v2) : CST.modulename) =
+  let v1 =
+    (match v1 with
+    | Some xs -> R.Option (Some (
+        R.List (List.map (fun (v1, v2) ->
+          let v1 =
+            (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
+          in
+          let v2 = (* "." *) token env v2 in
+          R.Tuple [v1; v2]
+        ) xs)
+      ))
+    | None -> R.Option None)
+  in
+  let v2 =
+    (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v2
+  in
+  R.Tuple [v1; v2]
 
 let map_label (env : env) ((v1, v2) : CST.label) =
   let v1 =
@@ -834,6 +852,15 @@ let map_asmtr (env : env) ((v1, v2, v3) : CST.asmtr) =
   let v3 = (* pattern end *) token env v3 in
   R.Tuple [v1; v2; v3]
 
+let map_decllabels (env : env) ((v1, v2, v3, v4) : CST.decllabels) =
+  let v1 = (* pattern label *) token env v1 in
+  let v2 = map_anon_opt_rep1_decl_COMMA_64c033f env v2 in
+  let v3 =
+    (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v3
+  in
+  let v4 = (* ";" *) token env v4 in
+  R.Tuple [v1; v2; v3; v4]
+
 let rec map_anon_choice_modu_eefd7e7 (env : env) (x : CST.anon_choice_modu_eefd7e7) =
   (match x with
   | `Modu x -> R.Case ("Modu",
@@ -862,15 +889,6 @@ and map_ppusesblock (env : env) ((v1, v2, v3, v4) : CST.ppusesblock) =
     ) v3)
   in
   let v4 = map_tok_prec_p5_pat_ef0cc7f env v4 in
-  R.Tuple [v1; v2; v3; v4]
-
-let map_decllabels (env : env) ((v1, v2, v3, v4) : CST.decllabels) =
-  let v1 = (* pattern label *) token env v1 in
-  let v2 = map_anon_opt_rep1_decl_COMMA_64c033f env v2 in
-  let v3 =
-    (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v3
-  in
-  let v4 = (* ";" *) token env v4 in
   R.Tuple [v1; v2; v3; v4]
 
 let map_literalstring_ (env : env) (x : CST.literalstring_) =
@@ -910,52 +928,6 @@ let map_ppusesblockwithsemi (env : env) ((v1, v2, v3, v4, v5) : CST.ppusesblockw
 let map_literalstring (env : env) (xs : CST.literalstring) =
   R.List (List.map (map_literalstring_ env) xs)
 
-let map_literal (env : env) (x : CST.literal) =
-  (match x with
-  | `Lite_4d69a90 x -> R.Case ("Lite_4d69a90",
-      map_literalstring env x
-    )
-  | `Lite_f64c399 x -> R.Case ("Lite_f64c399",
-      map_literalnumber env x
-    )
-  | `Knil tok -> R.Case ("Knil",
-      (* pattern nil *) token env tok
-    )
-  | `Ktrue tok -> R.Case ("Ktrue",
-      (* pattern true *) token env tok
-    )
-  | `Kfalse tok -> R.Case ("Kfalse",
-      (* pattern false *) token env tok
-    )
-  )
-
-let map_subrangebound (env : env) (x : CST.subrangebound) =
-  (match x with
-  | `Lite_f64c399 x -> R.Case ("Lite_f64c399",
-      map_literalnumber env x
-    )
-  | `Choice_DASH_lite (v1, v2) -> R.Case ("Choice_DASH_lite",
-      let v1 =
-        (match v1 with
-        | `DASH tok -> R.Case ("DASH",
-            (* "-" *) token env tok
-          )
-        | `PLUS tok -> R.Case ("PLUS",
-            (* "+" *) token env tok
-          )
-        )
-      in
-      let v2 = map_literalnumber env v2 in
-      R.Tuple [v1; v2]
-    )
-  | `Lite_4d69a90 x -> R.Case ("Lite_4d69a90",
-      map_literalstring env x
-    )
-  | `Type_ x -> R.Case ("Type_",
-      map_typeref_ env x
-    )
-  )
-
 let map_hintdirective (env : env) (x : CST.hintdirective) =
   (match x with
   | `Kdep_opt_lite (v1, v2) -> R.Case ("Kdep_opt_lite",
@@ -974,6 +946,25 @@ let map_hintdirective (env : env) (x : CST.hintdirective) =
     )
   | `Kexp tok -> R.Case ("Kexp",
       (* pattern experimental *) token env tok
+    )
+  )
+
+let map_literal (env : env) (x : CST.literal) =
+  (match x with
+  | `Lite_4d69a90 x -> R.Case ("Lite_4d69a90",
+      map_literalstring env x
+    )
+  | `Lite_f64c399 x -> R.Case ("Lite_f64c399",
+      map_literalnumber env x
+    )
+  | `Knil tok -> R.Case ("Knil",
+      (* pattern nil *) token env tok
+    )
+  | `Ktrue tok -> R.Case ("Ktrue",
+      (* pattern true *) token env tok
+    )
+  | `Kfalse tok -> R.Case ("Kfalse",
+      (* pattern false *) token env tok
     )
   )
 
@@ -1049,6 +1040,22 @@ and map_anon_choice_bloc_1cb9769 (env : env) (x : CST.anon_choice_bloc_1cb9769) 
     )
   | `Asmtr x -> R.Case ("Asmtr",
       map_asmtr env x
+    )
+  )
+
+and map_anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07 (env : env) (x : CST.anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07) =
+  (match x with
+  | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa (v1, v2, v3, v4) -> R.Case ("Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa",
+      let v1 = map_anon_choice_kvar_df0f889 env v1 in
+      let v2 = map_anon_opt_rep1_decl_COMMA_64c033f env v2 in
+      let v3 =
+        (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v3
+      in
+      let v4 = map_anon_opt_COLON_type_opt_defa_30ea779 env v4 in
+      R.Tuple [v1; v2; v3; v4]
+    )
+  | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa x -> R.Case ("Opt_rep1_id_COMMA_id_COLON_type_opt_defa",
+      map_declvariantfield env x
     )
   )
 
@@ -1214,6 +1221,30 @@ and map_anon_choice_kexc_opt_choice_stat__d8e7a89 (env : env) (x : CST.anon_choi
     )
   )
 
+and map_anon_choice_kvar_df0f889 (env : env) (x : CST.anon_choice_kvar_df0f889) =
+  (match x with
+  | `Kvar tok -> R.Case ("Kvar",
+      (* pattern var *) token env tok
+    )
+  | `Kout tok -> R.Case ("Kout",
+      (* pattern out *) token env tok
+    )
+  | `Kcon tok -> R.Case ("Kcon",
+      (* pattern constref *) token env tok
+    )
+  | `Kconst_opt_rttias (v1, v2) -> R.Case ("Kconst_opt_rttias",
+      let v1 = (* pattern const *) token env v1 in
+      let v2 =
+        (match v2 with
+        | Some x -> R.Option (Some (
+            map_rttiattributes env x
+          ))
+        | None -> R.Option None)
+      in
+      R.Tuple [v1; v2]
+    )
+  )
+
 and map_anon_choice_proc__b0bc660 (env : env) (x : CST.anon_choice_proc__b0bc660) =
   (match x with
   | `Proc_ x -> R.Case ("Proc_",
@@ -1240,7 +1271,7 @@ and map_anon_choice_stat_2a62092 (env : env) (x : CST.anon_choice_stat_2a62092) 
       map_statementtr env x
     )
   | `If x -> R.Case ("If",
-      map_nestediftr env x
+      map_nestedif env x
     )
   )
 
@@ -1262,6 +1293,38 @@ and map_anon_choice_stat__f368a69 (env : env) (x : CST.anon_choice_stat__f368a69
       R.Tuple [v1; v2; v3]
     )
   )
+
+and map_anon_choice_type_22ff6c5 (env : env) (x : CST.anon_choice_type_22ff6c5) =
+  (match x with
+  | `Type x -> R.Case ("Type",
+      map_typeref env x
+    )
+  | `Kclass tok -> R.Case ("Kclass",
+      (* pattern class *) token env tok
+    )
+  | `Krec tok -> R.Case ("Krec",
+      (* pattern record *) token env tok
+    )
+  | `Kcon tok -> R.Case ("Kcon",
+      (* pattern constructor *) token env tok
+    )
+  )
+
+and map_anon_opt_COLON_type_opt_defa_30ea779 (env : env) (opt : CST.anon_opt_COLON_type_opt_defa_30ea779) =
+  (match opt with
+  | Some (v1, v2, v3) -> R.Option (Some (
+      let v1 = (* ":" *) token env v1 in
+      let v2 = map_type_ env v2 in
+      let v3 =
+        (match v3 with
+        | Some x -> R.Option (Some (
+            map_defaultvalue env x
+          ))
+        | None -> R.Option None)
+      in
+      R.Tuple [v1; v2; v3]
+    ))
+  | None -> R.Option None)
 
 and map_anon_opt_kdep_opt_expr_9e396fa (env : env) (opt : CST.anon_opt_kdep_opt_expr_9e396fa) =
   (match opt with
@@ -1426,61 +1489,34 @@ and map_classdeclarations (env : env) (xs : CST.classdeclarations) =
     )
   ) xs)
 
+and map_constdef (env : env) ((v1, v2, v3, v4) : CST.constdef) =
+  let v1 = (* pattern const *) token env v1 in
+  let v2 =
+    (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v2
+  in
+  let v3 =
+    (match v3 with
+    | Some (v1, v2) -> R.Option (Some (
+        let v1 = (* ":" *) token env v1 in
+        let v2 = map_type_ env v2 in
+        R.Tuple [v1; v2]
+      ))
+    | None -> R.Option None)
+  in
+  let v4 = map_defaultvalue env v4 in
+  R.Tuple [v1; v2; v3; v4]
+
 and map_declarg (env : env) (x : CST.declarg) =
   (match x with
   | `Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa x -> R.Case ("Choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa",
-      (match x with
-      | `Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa (v1, v2, v3, v4) -> R.Case ("Choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa",
-          let v1 =
-            (match v1 with
-            | `Kvar tok -> R.Case ("Kvar",
-                (* pattern var *) token env tok
-              )
-            | `Kout tok -> R.Case ("Kout",
-                (* pattern out *) token env tok
-              )
-            | `Kcon tok -> R.Case ("Kcon",
-                (* pattern constref *) token env tok
-              )
-            | `Kconst_opt_rttias (v1, v2) -> R.Case ("Kconst_opt_rttias",
-                let v1 = (* pattern const *) token env v1 in
-                let v2 =
-                  (match v2 with
-                  | Some x -> R.Option (Some (
-                      map_rttiattributes env x
-                    ))
-                  | None -> R.Option None)
-                in
-                R.Tuple [v1; v2]
-              )
-            )
-          in
-          let v2 = map_anon_opt_rep1_decl_COMMA_64c033f env v2 in
-          let v3 =
-            (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v3
-          in
-          let v4 =
-            (match v4 with
-            | Some (v1, v2, v3) -> R.Option (Some (
-                let v1 = (* ":" *) token env v1 in
-                let v2 = map_type_ env v2 in
-                let v3 =
-                  (match v3 with
-                  | Some x -> R.Option (Some (
-                      map_defaultvalue env x
-                    ))
-                  | None -> R.Option None)
-                in
-                R.Tuple [v1; v2; v3]
-              ))
-            | None -> R.Option None)
-          in
-          R.Tuple [v1; v2; v3; v4]
-        )
-      | `Opt_rep1_id_COMMA_id_COLON_type_opt_defa x -> R.Case ("Opt_rep1_id_COMMA_id_COLON_type_opt_defa",
-          map_declvariantfield env x
-        )
-      )
+      map_anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07 env x
+    )
+  | `Rttias_choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa (v1, v2) -> R.Case ("Rttias_choice_choice_kvar_opt_rep1_id_COMMA_id_opt_COLON_type_opt_defa",
+      let v1 = map_rttiattributes env v1 in
+      let v2 =
+        map_anon_choice_choice_kvar_opt_rep1_decl_COMMA_decl_opt_COLON_type_opt_defa_e4b5f07 env v2
+      in
+      R.Tuple [v1; v2]
     )
   | `Semg_ellips tok -> R.Case ("Semg_ellips",
       (* "..." *) token env tok
@@ -1500,6 +1536,47 @@ and map_declargs (env : env) ((v1, v2, v3) : CST.declargs) =
   in
   let v3 = (* ")" *) token env v3 in
   R.Tuple [v1; v2; v3]
+
+and map_declarray (env : env) ((v1, v2, v3, v4, v5) : CST.declarray) =
+  let v1 =
+    (match v1 with
+    | Some tok -> R.Option (Some (
+        (* pattern packed *) token env tok
+      ))
+    | None -> R.Option None)
+  in
+  let v2 = (* pattern array *) token env v2 in
+  let v3 =
+    (match v3 with
+    | Some (v1, v2, v3) -> R.Option (Some (
+        let v1 = (* "[" *) token env v1 in
+        let v2 =
+          (match v2 with
+          | Some (v1, v2) -> R.Option (Some (
+              let v1 =
+                (match v1 with
+                | Some xs -> R.Option (Some (
+                    R.List (List.map (fun (v1, v2) ->
+                      let v1 = map_anon_choice_range_ff5eaed env v1 in
+                      let v2 = (* "," *) token env v2 in
+                      R.Tuple [v1; v2]
+                    ) xs)
+                  ))
+                | None -> R.Option None)
+              in
+              let v2 = map_anon_choice_range_ff5eaed env v2 in
+              R.Tuple [v1; v2]
+            ))
+          | None -> R.Option None)
+        in
+        let v3 = (* "]" *) token env v3 in
+        R.Tuple [v1; v2; v3]
+      ))
+    | None -> R.Option None)
+  in
+  let v4 = (* pattern of *) token env v4 in
+  let v5 = map_type_ env v5 in
+  R.Tuple [v1; v2; v3; v4; v5]
 
 and map_declclass (env : env) ((v1, v2, v3, v4, v5) : CST.declclass) =
   let v1 =
@@ -1978,6 +2055,51 @@ and map_declprocfwd (env : env) ((v1, v2, v3) : CST.declprocfwd) =
   let v3 = R.List (List.map (map_procattribute env) v3) in
   R.Tuple [v1; v2; v3]
 
+and map_declprocref (env : env) ((v1, v2, v3, v4, v5, v6) : CST.declprocref) =
+  let v1 =
+    (match v1 with
+    | Some (v1, v2) -> R.Option (Some (
+        let v1 = (* pattern reference *) token env v1 in
+        let v2 = (* pattern to *) token env v2 in
+        R.Tuple [v1; v2]
+      ))
+    | None -> R.Option None)
+  in
+  let v2 = map_anon_choice_kpro_f69e586 env v2 in
+  let v3 =
+    (match v3 with
+    | Some x -> R.Option (Some (
+        map_declargs env x
+      ))
+    | None -> R.Option None)
+  in
+  let v4 =
+    (match v4 with
+    | Some (v1, v2) -> R.Option (Some (
+        let v1 = (* ":" *) token env v1 in
+        let v2 = map_typeref env v2 in
+        R.Tuple [v1; v2]
+      ))
+    | None -> R.Option None)
+  in
+  let v5 =
+    (match v5 with
+    | Some (v1, v2) -> R.Option (Some (
+        let v1 = (* pattern of *) token env v1 in
+        let v2 = (* pattern object *) token env v2 in
+        R.Tuple [v1; v2]
+      ))
+    | None -> R.Option None)
+  in
+  let v6 =
+    (match v6 with
+    | Some x -> R.Option (Some (
+        map_anon_choice_kstd_a801c0a env x
+      ))
+    | None -> R.Option None)
+  in
+  R.Tuple [v1; v2; v3; v4; v5; v6]
+
 and map_declprop (env : env) ((v1, v2, v3, v4, v5, v6, v7, v8, v9) : CST.declprop) =
   let v1 =
     (match v1 with
@@ -2062,10 +2184,10 @@ and map_declprop (env : env) ((v1, v2, v3, v4, v5, v6, v7, v8, v9) : CST.declpro
           (* pattern nodefault *) token env tok
         )
       | `Krea tok -> R.Case ("Krea",
-          (* pattern readonly *) token env tok
+          (* kreadonly *) token env tok
         )
       | `Kwri tok -> R.Case ("Kwri",
-          (* pattern writeonly *) token env tok
+          (* kwriteonly *) token env tok
         )
       )
     ) v7)
@@ -2086,6 +2208,18 @@ and map_declpropargs (env : env) ((v1, v2, v3) : CST.declpropargs) =
     | None -> R.Option None)
   in
   let v3 = (* "]" *) token env v3 in
+  R.Tuple [v1; v2; v3]
+
+and map_declrecordinline (env : env) ((v1, v2, v3) : CST.declrecordinline) =
+  let v1 =
+    (match v1 with
+    | Some tok -> R.Option (Some (
+        (* pattern packed *) token env tok
+      ))
+    | None -> R.Option None)
+  in
+  let v2 = (* pattern record *) token env v2 in
+  let v3 = map_declclass_ env v3 in
   R.Tuple [v1; v2; v3]
 
 and map_declsection (env : env) ((v1, v2, v3, v4) : CST.declsection) =
@@ -2112,6 +2246,12 @@ and map_declsection (env : env) ((v1, v2, v3, v4) : CST.declsection) =
     | None -> R.Option None)
   in
   R.Tuple [v1; v2; v3; v4]
+
+and map_declset (env : env) ((v1, v2, v3) : CST.declset) =
+  let v1 = (* pattern set *) token env v1 in
+  let v2 = (* pattern of *) token env v2 in
+  let v3 = map_type_ env v3 in
+  R.Tuple [v1; v2; v3]
 
 and map_decltype (env : env) ((v1, v2, v3, v4, v5, v6, v7) : CST.decltype) =
   let v1 =
@@ -2690,16 +2830,31 @@ and map_exprunary (env : env) (x : CST.exprunary) =
   )
 
 and map_genericarg (env : env) ((v1, v2, v3, v4) : CST.genericarg) =
-  let v1 = map_anon_opt_rep1_decl_COMMA_64c033f env v1 in
+  let v1 =
+    R.List (List.map (fun (v1, v2) ->
+      let v1 =
+        (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
+      in
+      let v2 = (* "," *) token env v2 in
+      R.Tuple [v1; v2]
+    ) v1)
+  in
   let v2 =
     (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v2
   in
   let v3 =
     (match v3 with
-    | Some (v1, v2) -> R.Option (Some (
+    | Some (v1, v2, v3) -> R.Option (Some (
         let v1 = (* ":" *) token env v1 in
-        let v2 = map_typeref env v2 in
-        R.Tuple [v1; v2]
+        let v2 =
+          R.List (List.map (fun (v1, v2) ->
+            let v1 = map_anon_choice_type_22ff6c5 env v1 in
+            let v2 = (* "," *) token env v2 in
+            R.Tuple [v1; v2]
+          ) v2)
+        in
+        let v3 = map_anon_choice_type_22ff6c5 env v3 in
+        R.Tuple [v1; v2; v3]
       ))
     | None -> R.Option None)
   in
@@ -2780,7 +2935,7 @@ and map_legacyformat (env : env) (xs : CST.legacyformat) =
     R.Tuple [v1; v2]
   ) xs)
 
-and map_nestediftr (env : env) (x : CST.nestediftr) =
+and map_nestedif (env : env) (x : CST.nestedif) =
   map_if_ env x
 
 and map_operatordot (env : env) ((v1, v2, v3) : CST.operatordot) =
@@ -3383,7 +3538,7 @@ and map_statement (env : env) (x : CST.statement) =
       map_statement_ env x
     )
   | `If x -> R.Case ("If",
-      map_nestediftr env x
+      map_nestedif env x
     )
   | `Ifelse (v1, v2, v3, v4, v5, v6) -> R.Case ("Ifelse",
       let v1 = (* pattern if *) token env v1 in
@@ -3540,6 +3695,16 @@ and map_statement (env : env) (x : CST.statement) =
       let v3 = (* pattern end *) token env v3 in
       let v4 = (* ";" *) token env v4 in
       R.Tuple [v1; v2; v3; v4]
+    )
+  | `Vard_SEMI (v1, v2) -> R.Case ("Vard_SEMI",
+      let v1 = map_vardefmulti env v1 in
+      let v2 = (* ";" *) token env v2 in
+      R.Tuple [v1; v2]
+    )
+  | `Cons_SEMI (v1, v2) -> R.Case ("Cons_SEMI",
+      let v1 = map_constdef env v1 in
+      let v2 = (* ";" *) token env v2 in
+      R.Tuple [v1; v2]
     )
   | `Semg_ellips tok -> R.Case ("Semg_ellips",
       (* "..." *) token env tok
@@ -3789,6 +3954,42 @@ and map_statementtr_ (env : env) (x : CST.statementtr_) =
     )
   )
 
+and map_subrangebound (env : env) (x : CST.subrangebound) =
+  (match x with
+  | `Lite_f64c399 x -> R.Case ("Lite_f64c399",
+      map_literalnumber env x
+    )
+  | `Choice_DASH_lite (v1, v2) -> R.Case ("Choice_DASH_lite",
+      let v1 =
+        (match v1 with
+        | `DASH tok -> R.Case ("DASH",
+            (* "-" *) token env tok
+          )
+        | `PLUS tok -> R.Case ("PLUS",
+            (* "+" *) token env tok
+          )
+        )
+      in
+      let v2 = map_literalnumber env v2 in
+      R.Tuple [v1; v2]
+    )
+  | `Lite_4d69a90 x -> R.Case ("Lite_4d69a90",
+      map_literalstring env x
+    )
+  | `Type_ x -> R.Case ("Type_",
+      map_typeref_ env x
+    )
+  | `Subr (v1, v2, v3, v4) -> R.Case ("Subr",
+      let v1 =
+        (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
+      in
+      let v2 = (* "(" *) token env v2 in
+      let v3 = map_exprargs env v3 in
+      let v4 = (* ")" *) token env v4 in
+      R.Tuple [v1; v2; v3; v4]
+    )
+  )
+
 and map_type_ (env : env) (x : CST.type_) =
   (match x with
   | `Type x -> R.Case ("Type",
@@ -3817,52 +4018,11 @@ and map_type_ (env : env) (x : CST.type_) =
       let v4 = (* ")" *) token env v4 in
       R.Tuple [v1; v2; v3; v4]
     )
-  | `Decl_9b757b1 (v1, v2, v3) -> R.Case ("Decl_9b757b1",
-      let v1 = (* pattern set *) token env v1 in
-      let v2 = (* pattern of *) token env v2 in
-      let v3 = map_type_ env v3 in
-      R.Tuple [v1; v2; v3]
+  | `Decl_9b757b1 x -> R.Case ("Decl_9b757b1",
+      map_declset env x
     )
-  | `Decl_fb3a596 (v1, v2, v3, v4, v5) -> R.Case ("Decl_fb3a596",
-      let v1 =
-        (match v1 with
-        | Some tok -> R.Option (Some (
-            (* pattern packed *) token env tok
-          ))
-        | None -> R.Option None)
-      in
-      let v2 = (* pattern array *) token env v2 in
-      let v3 =
-        (match v3 with
-        | Some (v1, v2, v3) -> R.Option (Some (
-            let v1 = (* "[" *) token env v1 in
-            let v2 =
-              (match v2 with
-              | Some (v1, v2) -> R.Option (Some (
-                  let v1 =
-                    (match v1 with
-                    | Some xs -> R.Option (Some (
-                        R.List (List.map (fun (v1, v2) ->
-                          let v1 = map_anon_choice_range_ff5eaed env v1 in
-                          let v2 = (* "," *) token env v2 in
-                          R.Tuple [v1; v2]
-                        ) xs)
-                      ))
-                    | None -> R.Option None)
-                  in
-                  let v2 = map_anon_choice_range_ff5eaed env v2 in
-                  R.Tuple [v1; v2]
-                ))
-              | None -> R.Option None)
-            in
-            let v3 = (* "]" *) token env v3 in
-            R.Tuple [v1; v2; v3]
-          ))
-        | None -> R.Option None)
-      in
-      let v4 = (* pattern of *) token env v4 in
-      let v5 = map_type_ env v5 in
-      R.Tuple [v1; v2; v3; v4; v5]
+  | `Decl_fb3a596 x -> R.Case ("Decl_fb3a596",
+      map_declarray env x
     )
   | `Decl_d33f432 (v1, v2) -> R.Case ("Decl_d33f432",
       let v1 = (* pattern file *) token env v1 in
@@ -3898,50 +4058,8 @@ and map_type_ (env : env) (x : CST.type_) =
       let v3 = map_anon_opt_kdep_opt_expr_9e396fa env v3 in
       R.Tuple [v1; v2; v3]
     )
-  | `Decl_4eec7e9 (v1, v2, v3, v4, v5, v6) -> R.Case ("Decl_4eec7e9",
-      let v1 =
-        (match v1 with
-        | Some (v1, v2) -> R.Option (Some (
-            let v1 = (* pattern reference *) token env v1 in
-            let v2 = (* pattern to *) token env v2 in
-            R.Tuple [v1; v2]
-          ))
-        | None -> R.Option None)
-      in
-      let v2 = map_anon_choice_kpro_f69e586 env v2 in
-      let v3 =
-        (match v3 with
-        | Some x -> R.Option (Some (
-            map_declargs env x
-          ))
-        | None -> R.Option None)
-      in
-      let v4 =
-        (match v4 with
-        | Some (v1, v2) -> R.Option (Some (
-            let v1 = (* ":" *) token env v1 in
-            let v2 = map_typeref env v2 in
-            R.Tuple [v1; v2]
-          ))
-        | None -> R.Option None)
-      in
-      let v5 =
-        (match v5 with
-        | Some (v1, v2) -> R.Option (Some (
-            let v1 = (* pattern of *) token env v1 in
-            let v2 = (* pattern object *) token env v2 in
-            R.Tuple [v1; v2]
-          ))
-        | None -> R.Option None)
-      in
-      let v6 =
-        (match v6 with
-        | Some x -> R.Option (Some (
-            map_anon_choice_kstd_a801c0a env x
-          ))
-        | None -> R.Option None)
-      in
-      R.Tuple [v1; v2; v3; v4; v5; v6]
+  | `Decl_4eec7e9 x -> R.Case ("Decl_4eec7e9",
+      map_declprocref env x
     )
   | `Decl_0ebbf4b (v1, v2, v3) -> R.Case ("Decl_0ebbf4b",
       let v1 = map_subrangebound env v1 in
@@ -3949,17 +4067,8 @@ and map_type_ (env : env) (x : CST.type_) =
       let v3 = map_subrangebound env v3 in
       R.Tuple [v1; v2; v3]
     )
-  | `Decl_dd9f703 (v1, v2, v3) -> R.Case ("Decl_dd9f703",
-      let v1 =
-        (match v1 with
-        | Some tok -> R.Option (Some (
-            (* pattern packed *) token env tok
-          ))
-        | None -> R.Option None)
-      in
-      let v2 = (* pattern record *) token env v2 in
-      let v3 = map_declclass_ env v3 in
-      R.Tuple [v1; v2; v3]
+  | `Decl_dd9f703 x -> R.Case ("Decl_dd9f703",
+      map_declrecordinline env x
     )
   )
 
@@ -3984,29 +4093,64 @@ and map_vardef (env : env) ((v1, v2, v3, v4) : CST.vardef) =
   let v4 = map_typeref env v4 in
   R.Tuple [v1; v2; v3; v4]
 
-let map_library (env : env) ((v1, v2, v3, v4, v5, v6) : CST.library) =
-  let v1 = (* pattern library *) token env v1 in
-  let v2 = map_modulename env v2 in
-  let v3 = (* ";" *) token env v3 in
-  let v4 =
-    (match v4 with
+and map_vardefmulti (env : env) ((v1, v2) : CST.vardefmulti) =
+  let v1 = (* pattern var *) token env v1 in
+  let v2 =
+    (match v2 with
+    | `Id_rep1_COMMA_id_COLON_type (v1, v2, v3, v4) -> R.Case ("Id_rep1_COMMA_id_COLON_type",
+        let v1 =
+          (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
+        in
+        let v2 =
+          R.List (List.map (fun (v1, v2) ->
+            let v1 = (* "," *) token env v1 in
+            let v2 =
+              (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v2
+            in
+            R.Tuple [v1; v2]
+          ) v2)
+        in
+        let v3 = (* ":" *) token env v3 in
+        let v4 = map_type_ env v4 in
+        R.Tuple [v1; v2; v3; v4]
+      )
+    | `Id_COLON_choice_decl (v1, v2, v3) -> R.Case ("Id_COLON_choice_decl",
+        let v1 =
+          (* pattern [&]?[\p{L}_][\p{L}\p{N}_$]*|\$[A-Z_][A-Z_0-9]*|\$\.\.\.[A-Z_][A-Z_0-9]* *) token env v1
+        in
+        let v2 = (* ":" *) token env v2 in
+        let v3 =
+          (match v3 with
+          | `Decl_fb3a596 x -> R.Case ("Decl_fb3a596",
+              map_declarray env x
+            )
+          | `Decl_9b757b1 x -> R.Case ("Decl_9b757b1",
+              map_declset env x
+            )
+          | `Decl_4eec7e9 x -> R.Case ("Decl_4eec7e9",
+              map_declprocref env x
+            )
+          | `Decl_dd9f703 x -> R.Case ("Decl_dd9f703",
+              map_declrecordinline env x
+            )
+          )
+        in
+        R.Tuple [v1; v2; v3]
+      )
+    )
+  in
+  R.Tuple [v1; v2]
+
+let map_implementation (env : env) ((v1, v2) : CST.implementation) =
+  let v1 = (* pattern implementation *) token env v1 in
+  let v2 =
+    (match v2 with
     | Some x -> R.Option (Some (
         map_definitions env x
       ))
     | None -> R.Option None)
   in
-  let v5 =
-    (match v5 with
-    | `Bloc x -> R.Case ("Bloc",
-        map_blocktr env x
-      )
-    | `Kend tok -> R.Case ("Kend",
-        (* pattern end *) token env tok
-      )
-    )
-  in
-  let v6 = (* "." *) token env v6 in
-  R.Tuple [v1; v2; v3; v4; v5; v6]
+  R.Tuple [v1; v2]
 
 let map_declarations (env : env) (xs : CST.declarations) =
   R.List (List.map (fun x ->
@@ -4047,19 +4191,29 @@ let map_declarations (env : env) (xs : CST.declarations) =
     )
   ) xs)
 
-let map_implementation (env : env) ((v1, v2) : CST.implementation) =
-  let v1 = (* pattern implementation *) token env v1 in
-  let v2 =
-    (match v2 with
-    | Some x -> R.Option (Some (
-        map_definitions env x
-      ))
-    | None -> R.Option None)
-  in
-  R.Tuple [v1; v2]
+let map_statements (env : env) (xs : CST.statements) =
+  R.List (List.map (fun x ->
+    (match x with
+    | `Vardef x -> R.Case ("Vardef",
+        map_vardef env x
+      )
+    | `Stmt x -> R.Case ("Stmt",
+        map_statement env x
+      )
+    | `Label x -> R.Case ("Label",
+        map_label env x
+      )
+    | `Ppbl x -> R.Case ("Ppbl",
+        map_ppblock env x
+      )
+    | `Ppfr tok -> R.Case ("Ppfr",
+        (* ppfragmentstmt *) token env tok
+      )
+    )
+  ) xs)
 
-let map_finalization (env : env) ((v1, v2) : CST.finalization) =
-  let v1 = (* pattern finalization *) token env v1 in
+let map_initialization (env : env) ((v1, v2) : CST.initialization) =
+  let v1 = (* pattern initialization *) token env v1 in
   let v2 =
     (match v2 with
     | Some x -> R.Option (Some (
@@ -4084,29 +4238,32 @@ let map_program (env : env) ((v1, v2, v3, v4, v5, v6) : CST.program) =
   let v6 = (* "." *) token env v6 in
   R.Tuple [v1; v2; v3; v4; v5; v6]
 
-let map_statements (env : env) (xs : CST.statements) =
-  R.List (List.map (fun x ->
-    (match x with
-    | `Vardef x -> R.Case ("Vardef",
-        map_vardef env x
+let map_library (env : env) ((v1, v2, v3, v4, v5, v6) : CST.library) =
+  let v1 = (* pattern library *) token env v1 in
+  let v2 = map_modulename env v2 in
+  let v3 = (* ";" *) token env v3 in
+  let v4 =
+    (match v4 with
+    | Some x -> R.Option (Some (
+        map_definitions env x
+      ))
+    | None -> R.Option None)
+  in
+  let v5 =
+    (match v5 with
+    | `Bloc x -> R.Case ("Bloc",
+        map_blocktr env x
       )
-    | `Stmt x -> R.Case ("Stmt",
-        map_statement env x
-      )
-    | `Label x -> R.Case ("Label",
-        map_label env x
-      )
-    | `Ppbl x -> R.Case ("Ppbl",
-        map_ppblock env x
-      )
-    | `Ppfr tok -> R.Case ("Ppfr",
-        (* ppfragmentstmt *) token env tok
+    | `Kend tok -> R.Case ("Kend",
+        (* pattern end *) token env tok
       )
     )
-  ) xs)
+  in
+  let v6 = (* "." *) token env v6 in
+  R.Tuple [v1; v2; v3; v4; v5; v6]
 
-let map_initialization (env : env) ((v1, v2) : CST.initialization) =
-  let v1 = (* pattern initialization *) token env v1 in
+let map_finalization (env : env) ((v1, v2) : CST.finalization) =
+  let v1 = (* pattern finalization *) token env v1 in
   let v2 =
     (match v2 with
     | Some x -> R.Option (Some (
@@ -4281,11 +4438,11 @@ let map_root (env : env) (x : CST.root) =
     )
   )
 
-let map_ppdirective (env : env) (tok : CST.ppdirective) =
-  (* ppdirective *) token env tok
-
 let map_comment (env : env) (tok : CST.comment) =
   (* comment *) token env tok
+
+let map_ppdirective (env : env) (tok : CST.ppdirective) =
+  (* ppdirective *) token env tok
 
 let map_space (env : env) (tok : CST.space) =
   (* pattern [\s\r\n\t﻿]+ *) token env tok

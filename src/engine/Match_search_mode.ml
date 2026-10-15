@@ -245,6 +245,31 @@ let debug_semgrep config mini_rules file lang ast =
 (* Evaluating Semgrep patterns *)
 (*****************************************************************************)
 
+(* Pascal: a call without arguments can be written without parentheses
+ * (`TFoo.Create`), so the Pascal pattern parser turns `f(...)` into the
+ * disjunction `f(...) | f`. On a target call `f(1)` both alternatives match:
+ * the whole call and its callee `f`, at the same start position. Keep only
+ * the longest match per pattern and start position, so each call is
+ * reported once. *)
+let drop_same_start_submatches (matches : Core_match.t list) : Core_match.t list
+    =
+  let key (m : Core_match.t) =
+    (Rule_ID.to_string m.rule_id.id, (fst m.range_loc).pos.bytepos)
+  in
+  let end_pos (m : Core_match.t) = (snd m.range_loc).pos.bytepos in
+  let longest = Base.Hashtbl.Poly.create ~size:(List.length matches) () in
+  matches
+  |> List.iter (fun m ->
+      let k = key m in
+      match Base.Hashtbl.find longest k with
+      | Some e when e >= end_pos m -> ()
+      | _ -> Base.Hashtbl.set longest ~key:k ~data:(end_pos m));
+  matches
+  |> List.filter (fun m ->
+      match Base.Hashtbl.find longest (key m) with
+      | Some e -> Int.equal e (end_pos m)
+      | None -> true)
+
 let matches_of_patterns ~has_as_metavariable ?mvar_context ?range_filter rule
     (xconf : xconfig) (xtarget : Xtarget.t)
     (patterns : (Pattern.t * bool * Xpattern.pattern_id * string) list) :
@@ -280,7 +305,11 @@ let matches_of_patterns ~has_as_metavariable ?mvar_context ?range_filter rule
                 ~hook:(fun _ -> ())
                 ~has_as_metavariable ?mvar_context ?range_filter config
                 mini_rules
-                (internal_path_to_content, origin, lang, ast))
+                (internal_path_to_content, origin, lang, ast)
+              |>
+              match lang with
+              | Lang.Pascal -> drop_same_start_submatches
+              | _ -> Fun.id)
       in
       let errors = Parse_target.errors_from_skipped_tokens skipped_tokens in
       RP.mk_match_result matches errors

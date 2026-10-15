@@ -45,10 +45,15 @@
  * Configuration (environment variables, read once):
  *  - SEMGREP_PASCAL_DEFINES: comma- or semicolon-separated list of symbols
  *    added to the default set; prefix with '-' to remove a default, e.g.
- *    "RELEASE;PFC_SERVER;-WIN32;WIN64;CPUX64"
+ *    "RELEASE;MY_FEATURE;-WIN32;WIN64;CPUX64"
  *  - SEMGREP_PASCAL_NO_DEFAULT_DEFINES=1: start from an empty set
  *  - SEMGREP_PASCAL_COMPILER_VERSION: value of CompilerVersion (default 36)
  *  - SEMGREP_PASCAL_NO_PREPROCESS=1: disable this preprocessing entirely
+ *  - SEMGREP_PASCAL_INCLUDE_PATH: ';'-separated directories searched for
+ *    {$I} files after the directory of the including file (like dcc -I)
+ *
+ * Include files are looked up case-insensitively. A missing or unreadable
+ * include file is ignored (its defines are then simply unknown).
  *)
 
 (*****************************************************************************)
@@ -350,11 +355,64 @@ let first_word (s : string) : string =
   | w :: _ -> String.uppercase_ascii (String.trim w)
   | [] -> ""
 
+(* A missing or unreadable file (including one that fails with
+ * Unix_error, as on Windows) is treated like an absent include. *)
 let read_file_opt (path : string) : string option =
-  try Some (UFile.read_file (Fpath.v path)) with
-  | Sys_error _
-  | Invalid_argument _ ->
-      None
+  if not (Sys.file_exists path) then None
+  else
+    try Some (UFile.read_file (Fpath.v path)) with
+    | Sys_error _
+    | Invalid_argument _
+    | Unix.Unix_error _ ->
+        None
+
+(* Directories searched for {$I} files after the directory of the including
+ * file, like dcc's -I option. Separated by ';' (or newlines); relative
+ * entries are relative to the current directory. *)
+let include_path : string list Lazy_safe.t =
+  Lazy_safe.from_fun (fun () ->
+      match getenv_opt "SEMGREP_PASCAL_INCLUDE_PATH" with
+      | None -> []
+      | Some s ->
+          s
+          |> String.map (function
+               | '\n'
+               | '\r' ->
+                   ';'
+               | '\\' -> '/'
+               | c -> c)
+          |> String.split_on_char ';' |> List.map String.trim
+          |> List.filter (fun d -> d <> ""))
+
+(* [dir/name], or the file in [dir] whose name matches [name] ignoring case
+ * (Delphi file names are case-insensitive; Linux file systems are not). *)
+let find_in_dir (dir : string) (name : string) : string option =
+  let p = Filename.concat dir name in
+  if Sys.file_exists p then Some p
+  else
+    (* name may contain subdirectories: only the last part is matched
+     * case-insensitively *)
+    let dir = Filename.concat dir (Filename.dirname name) in
+    let base = String.lowercase_ascii (Filename.basename name) in
+    match Sys.readdir dir with
+    | entries ->
+        Array.to_list entries
+        |> List.find_opt (fun e -> String.lowercase_ascii e = base)
+        |> Option.map (Filename.concat dir)
+    | exception (Sys_error _ | Unix.Unix_error _) -> None
+
+let resolve_include ~(basedir : string) (fname : string) : string option =
+  let names =
+    if Filename.extension fname = "" then [ fname; fname ^ ".inc" ]
+    else [ fname ]
+  in
+  if not (Filename.is_relative fname) then
+    List.find_map (fun f -> if Sys.file_exists f then Some f else None) names
+  else
+    let dirs = basedir :: Lazy_safe.force include_path in
+    List.find_map
+      (fun dir -> List.find_map (fun n -> find_in_dir dir n) names)
+      dirs
 
 (* [process ~defs ~basedir ~depth src] returns [src] with inactive regions
  * blanked. [defs] is updated with DEFINE/UNDEF seen in active regions. *)
@@ -513,7 +571,8 @@ let rec process ~(defs : SSet.t ref) ~(basedir : string) ~(depth : int)
           | "INCLUDE"
             when !active && depth < max_include_depth && word <> ""
                  && word.[0] <> '+'
-                 && word.[0] <> '-' ->
+                 && word.[0] <> '-'
+                 && word.[0] <> '%' (* {$I %DATE%} etc. *) ->
               let fname =
                 let a = String.trim arg in
                 let a =
@@ -527,23 +586,15 @@ let rec process ~(defs : SSet.t ref) ~(basedir : string) ~(depth : int)
                     | c -> c)
                   a
               in
-              let candidates =
-                [ fname; fname ^ ".inc" ]
-                |> List.map (fun f ->
-                    if Filename.is_relative f then Filename.concat basedir f
-                    else f)
-              in
-              let rec try_ = function
-                | [] -> ()
-                | p :: ps -> (
-                    match read_file_opt p with
-                    | Some contents ->
-                        ignore
-                          (process ~defs ~basedir:(Filename.dirname p)
-                             ~depth:(depth + 1) contents)
-                    | None -> try_ ps)
-              in
-              try_ candidates
+              (match resolve_include ~basedir fname with
+              | Some p -> (
+                  match read_file_opt p with
+                  | Some contents ->
+                      ignore
+                        (process ~defs ~basedir:(Filename.dirname p)
+                           ~depth:(depth + 1) contents)
+                  | None -> ())
+              | None -> ())
           | _ -> ());
           if is_cond then (
             blank start !i;
